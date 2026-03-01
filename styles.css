@@ -56,7 +56,7 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 header {
