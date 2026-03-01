@@ -109,13 +109,29 @@ function updateUI() {
         adminBtn.style.fontWeight = 'bold';
         
         adminBtn.onclick = () => {
-             const action = prompt("Admin Panel Options:\n1. Add Money\n2. Max All Upgrades\n3. Reset Game\n\nEnter 1, 2, or 3:");
+            const action = prompt("Admin Panel Options:\n1. Add Money\n2. Max All Upgrades\n3. Reset Game\n4. Admin Abuse Panel\n\nEnter 1, 2, 3, or 4:");
              if (action == '1') {
                  const amount = prompt("Enter amount to add:");
                  if(amount && !isNaN(amount)) {
                      state.money += parseInt(amount);
                      updateUI();
                  }
+             } else if (action == '4') {
+                // Admin Abuse Panel
+                const abuseAction = prompt("ADMIN ABUSE PANEL:\n1. Start 5x Cash Event\n2. Start 10x Cash Event\n3. Crash Economy (Set money to 0)\n4. Gift Everyone (Give all players 1M)\n\nEnter 1, 2, 3, or 4:");
+                
+                if (abuseAction == '1') {
+                    triggerGlobalEvent("5x CASH!!!", "money", 5);
+                } else if (abuseAction == '2') {
+                    triggerGlobalEvent("10x CASH!!!", "money", 10);
+                } else if (abuseAction == '3') {
+                    state.money = 0;
+                    alert("Economy crashed! Money set to 0.");
+                } else if (abuseAction == '4') {
+                    alert("Gifted everyone 1M!");
+                    // This would require a server to actually work
+                }
+                updateUI();
              } else if (action == '2') {
                  // Max out upgrades
                  for (const key in state.upgrades) {
@@ -489,6 +505,13 @@ function showEventNotification(text, color) {
     notif.style.animation = 'fadeInOut 3s forwards';
     document.body.appendChild(notif);
     setTimeout(() => notif.remove(), 3000);
+}
+
+function triggerGlobalEvent(name, type, multiplier) {
+    const duration = 30000; // 30 seconds
+    state.activeEvent = { name: name, type: type, multiplier: multiplier };
+    state.eventEndTime = Date.now() + duration;
+    showEventNotification("ADMIN ABUSE: " + name, "#ef4444");
 }
 
 // Code System
