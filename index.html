@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Card Clicker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Bank Card Clicker</h1>
+            <div class="stats">
+                <p>Money: $<span id="money">0</span></p>
+                <p>Money per Click: $<span id="money-per-click">1</span></p>
+                <p>Money per Second: $<span id="money-per-second">0</span></p>
+                <p>Title: <span id="current-title">Broke</span></p>
+            </div>
+        </header>
+
+        <main>
+            <section class="click-area">
+                <div id="bank-card" class="card">
+                    <div class="card-chip"></div>
+                    <div class="card-number">**** **** **** 1234</div>
+                    <div class="card-name">CLICK ME</div>
+                </div>
+            </section>
+
+            <div class="panels">
+                <section class="panel" id="upgrades-panel">
+                    <h2>Card Upgrades</h2>
+                    <div id="upgrades-list" class="list"></div>
+                </section>
+
+                <section class="panel" id="companies-panel">
+                    <h2>Companies</h2>
+                    <div id="companies-list" class="list"></div>
+                </section>
+
+                <section class="panel" id="real-estate-panel">
+                    <h2>Real Estate (Houses)</h2>
+                    <div id="real-estate-list" class="list"></div>
+                </section>
+
+                <section class="panel" id="shop-panel">
+                    <h2>Shop (Cars & Luxuries)</h2>
+                    <div id="shop-list" class="list"></div>
+                </section>
+
+                <section class="panel" id="stock-market-panel">
+                    <h2>Stock Market</h2>
+                    <div id="stock-list" class="list"></div>
+                </section>
+
+                <section class="panel" id="rewards-panel">
+                    <h2>Rewards & Titles</h2>
+                    <div id="rewards-list" class="list"></div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

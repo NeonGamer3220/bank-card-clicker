@@ -1,0 +1,242 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #121212;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+header {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    color: #4caf50;
+    margin-bottom: 10px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.stats span {
+    color: #4caf50;
+}
+
+main {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+}
+
+.click-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.card {
+    width: 300px;
+    height: 180px;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.1s, box-shadow 0.1s;
+    user-select: none;
+}
+
+.card:active {
+    transform: scale(0.95);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.card-chip {
+    width: 40px;
+    height: 30px;
+    background-color: #ffd700;
+    border-radius: 5px;
+}
+
+.card-number {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.card-name {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.panels {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    overflow-y: auto;
+    max-height: 70vh;
+    padding-right: 10px;
+}
+
+.panels::-webkit-scrollbar {
+    width: 8px;
+}
+
+.panels::-webkit-scrollbar-track {
+    background: #1e1e1e;
+    border-radius: 4px;
+}
+
+.panels::-webkit-scrollbar-thumb {
+    background: #4caf50;
+    border-radius: 4px;
+}
+
+.panel {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.panel h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #4caf50;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item {
+    background-color: #2a2a2a;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-name {
+    font-weight: bold;
+}
+
+.item-desc {
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.item-cost {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+.buy-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.buy-btn:hover {
+    background-color: #45a049;
+}
+
+.buy-btn:disabled {
+    background-color: #555;
+    color: #888;
+    cursor: not-allowed;
+}
+
+.stock-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2a2a2a;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.stock-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.stock-actions button {
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-buy { background-color: #4caf50; color: white; }
+.btn-sell { background-color: #f44336; color: white; }
+
+.btn-buy:disabled, .btn-sell:disabled {
+    background-color: #555;
+    color: #888;
+    cursor: not-allowed;
+}
+
+.price-up { color: #4caf50; }
+.price-down { color: #f44336; }
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+    .stats {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
