@@ -282,7 +282,7 @@ main {
     border-radius: 2px;
 }
 
-.item {
+.item, .stock-item {
     background: var(--item-bg);
     padding: 15px;
     border-radius: 10px;
@@ -303,7 +303,7 @@ main {
     }
 }
 
-.item:hover {
+.item:hover, .stock-item:hover {
     transform: translateY(-2px) scale(1.01);
     background: #3f516b;
     border-color: rgba(255,255,255,0.1);

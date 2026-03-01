@@ -123,10 +123,12 @@ function renderList(items, container, buyFunction) {
 // Render Shop
 function renderShop() {
     shopList.innerHTML = '';
+    let index = 0;
     for (const key in state.shop) {
         const item = state.shop[key];
         const div = document.createElement('div');
         div.className = 'item';
+        div.style.animationDelay = `${index * 0.1}s`;
         div.innerHTML = `
             <div class="item-info">
                 <span class="item-name"><i class="fa-solid ${item.icon}"></i> ${item.name}</span>
@@ -138,12 +140,14 @@ function renderShop() {
             </button>
         `;
         shopList.appendChild(div);
+        index++;
     }
 }
 
 // Render Stocks
 function renderStocks() {
     stockList.innerHTML = '';
+    let index = 0;
     for (const key in state.stocks) {
         const stock = state.stocks[key];
         const prevPrice = stock.history.length > 1 ? stock.history[stock.history.length - 2] : stock.price;
@@ -172,6 +176,7 @@ function renderStocks() {
 
         const div = document.createElement('div');
         div.className = 'stock-item';
+        div.style.animationDelay = `${index * 0.1}s`;
         div.innerHTML = `
             <div class="stock-header">
                 <div class="item-info">
@@ -187,17 +192,20 @@ function renderStocks() {
             </div>
         `;
         stockList.appendChild(div);
+        index++;
     }
 }
 
 // Render Rewards
 function renderRewards() {
     rewardsList.innerHTML = '';
+    let index = 0;
     for (const key in state.rewards) {
         const reward = state.rewards[key];
         const div = document.createElement('div');
         div.className = 'item';
         div.style.opacity = reward.unlocked ? '1' : '0.5';
+        div.style.animationDelay = `${index * 0.1}s`;
         div.innerHTML = `
             <div class="item-info">
                 <span class="item-name"><i class="fa-solid ${reward.icon}"></i> ${reward.name}</span>
@@ -208,6 +216,7 @@ function renderRewards() {
             </span>
         `;
         rewardsList.appendChild(div);
+        index++;
     }
 }
 
