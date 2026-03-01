@@ -679,7 +679,8 @@ async function loadGame() {
         }, 500);
     }
     
-    // Try to load from Supabase (only if player has played before)
+    // Try to load from Supabase (disabled for now)
+    /*
     try {
         const { data } = await supabase.rpc('get_player', { p_player_name: state.playerName });
         if (data && data.length > 0 && data[0].money > 0) {
@@ -697,6 +698,7 @@ async function loadGame() {
             console.log('Loaded from cloud!');
         }
     } catch(e) {}
+    */
 }
 
 // Initial Render
