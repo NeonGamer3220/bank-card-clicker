@@ -134,9 +134,11 @@ function renderStocks() {
         const div = document.createElement('div');
         div.className = 'stock-item';
         div.innerHTML = `
-            <div class="item-info">
-                <span class="item-name">${stock.name}</span>
-                <span class="item-desc">Owned: ${stock.owned}</span>
+            <div class="stock-header">
+                <div class="item-info">
+                    <span class="item-name">${stock.name}</span>
+                    <span class="item-desc">Owned: ${stock.owned}</span>
+                </div>
                 <span class="item-cost ${priceClass}">$${formatMoney(stock.price)} ${arrow}</span>
             </div>
             <div class="stock-actions">
@@ -286,21 +288,18 @@ bankCard.addEventListener('click', (e) => {
     
     // Create floating text
     const floatText = document.createElement('div');
+    floatText.className = 'floating-text';
     floatText.innerText = '+$' + formatMoney(state.moneyPerClick);
-    floatText.style.position = 'absolute';
-    floatText.style.left = e.clientX + 'px';
-    floatText.style.top = e.clientY + 'px';
-    floatText.style.color = '#4caf50';
-    floatText.style.fontWeight = 'bold';
-    floatText.style.pointerEvents = 'none';
-    floatText.style.transition = 'all 1s ease-out';
-    floatText.style.zIndex = '1000';
+    
+    // Get card position to center the text if clicked via keyboard, otherwise use mouse coords
+    const rect = bankCard.getBoundingClientRect();
+    const x = e.clientX || (rect.left + rect.width / 2);
+    const y = e.clientY || (rect.top + rect.height / 2);
+    
+    floatText.style.left = x + 'px';
+    floatText.style.top = y + 'px';
+    
     document.body.appendChild(floatText);
-
-    setTimeout(() => {
-        floatText.style.top = (e.clientY - 50) + 'px';
-        floatText.style.opacity = '0';
-    }, 10);
 
     setTimeout(() => {
         floatText.remove();
