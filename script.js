@@ -53,10 +53,17 @@ const state = {
         space: { price: 1000, owned: 0, name: "AstroX", history: [] }
     },
     rewards: {
-        firstThousand: { unlocked: false, req: 1000, name: "Thousandaire", desc: "Reach $1,000", icon: "fa-coins" },
-        firstMillion: { unlocked: false, req: 1000000, name: "Millionaire", desc: "Reach $1,000,000", icon: "fa-sack-dollar" },
-        firstBillion: { unlocked: false, req: 1000000000, name: "Billionaire", desc: "Reach $1,000,000,000", icon: "fa-vault" },
-        firstTrillion: { unlocked: false, req: 1000000000000, name: "Trillionaire", desc: "Reach $1,000,000,000,000", icon: "fa-money-bill-trend-up" }
+        first10: { unlocked: false, req: 10, name: "Beginner", desc: "Reach $10", icon: "fa-seedling" },
+        first100: { unlocked: false, req: 100, name: "Hundred Club", desc: "Reach $100", icon: "fa-coins" },
+        firstThousand: { unlocked: false, req: 1000, name: "Thousandaire", desc: "Reach $1,000", icon: "fa-money-bill-wave" },
+        first10k: { unlocked: false, req: 10000, name: "Ten Thousand", desc: "Reach $10,000", icon: "fa-sack-dollar" },
+        first100k: { unlocked: false, req: 100000, name: "Hundred Thousand", desc: "Reach $100,000", icon: "fa-vault" },
+        firstMillion: { unlocked: false, req: 1000000, name: "Millionaire", desc: "Reach $1M", icon: "fa-crown" },
+        first10M: { unlocked: false, req: 10000000, name: "Multi-Millionaire", desc: "Reach $10M", icon: "fa-gem" },
+        first100M: { unlocked: false, req: 100000000, name: "Centimillionaire", desc: "Reach $100M", icon: "fa-star" },
+        firstBillion: { unlocked: false, req: 1000000000, name: "Billionaire", desc: "Reach $1B", icon: "fa-rocket" },
+        first10B: { unlocked: false, req: 10000000000, name: "Ten Billionaire", desc: "Reach $10B", icon: "fa-globe" },
+        firstTrillion: { unlocked: false, req: 1000000000000, name: "Trillionaire", desc: "Reach $1T", icon: "fa-universe" }
     }
 };
 
@@ -409,11 +416,15 @@ function recalculateStats() {
 // Check Titles and Rewards
 function checkTitles() {
     // Titles
-    if (state.money >= 1000000000) state.title = "Billionaire";
+    if (state.money >= 1000000000000) state.title = "Trillionaire";
+    else if (state.money >= 1000000000) state.title = "Billionaire";
+    else if (state.money >= 100000000) state.title = "Centimillionaire";
+    else if (state.money >= 10000000) state.title = "Decamillionaire";
     else if (state.money >= 1000000) state.title = "Millionaire";
-    else if (state.money >= 100000) state.title = "Rich";
+    else if (state.money >= 100000) state.title = "Hundred Grand";
     else if (state.money >= 10000) state.title = "Wealthy";
     else if (state.money >= 1000) state.title = "Comfortable";
+    else if (state.money >= 100) state.title = "Getting Started";
     else state.title = "Broke";
 
     // Rewards
