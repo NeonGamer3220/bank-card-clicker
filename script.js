@@ -119,18 +119,18 @@ function updateUI() {
              } else if (action == '2') {
                  // Max out upgrades
                  for (const key in state.upgrades) {
-                     state.upgrades[key].level += 100;
+                     state.upgrades[key].level = MAX_LEVEL;
                  }
                  for (const key in state.companies) {
-                     state.companies[key].level += 100;
+                     state.companies[key].level = MAX_LEVEL;
                  }
                  for (const key in state.realEstate) {
-                     state.realEstate[key].level += 100;
+                     state.realEstate[key].level = MAX_LEVEL;
                  }
                  recalculateStats();
                  updateUI();
-                 alert("Upgrades maxed!");
-            } else if (action == '3') {
+                 alert("Upgrades maxed to level " + MAX_LEVEL + "!");
+             } else if (action == '3') {
                 // Clear all local storage
                 localStorage.clear();
                 // Reset state manually without reloading immediately
@@ -305,8 +305,11 @@ function renderLeaderboard() {
 }
 
 // Buy Functions
+const MAX_LEVEL = 250;
+
 function buyUpgrade(key) {
     const item = state.upgrades[key];
+    if (item.level >= MAX_LEVEL) return;
     const cost = getCost(item.baseCost, item.costMult, item.level);
     if (state.money >= cost) {
         state.money -= cost;
@@ -318,6 +321,7 @@ function buyUpgrade(key) {
 
 function buyCompany(key) {
     const item = state.companies[key];
+    if (item.level >= MAX_LEVEL) return;
     const cost = getCost(item.baseCost, item.costMult, item.level);
     if (state.money >= cost) {
         state.money -= cost;
@@ -329,6 +333,7 @@ function buyCompany(key) {
 
 function buyRealEstate(key) {
     const item = state.realEstate[key];
+    if (item.level >= MAX_LEVEL) return;
     const cost = getCost(item.baseCost, item.costMult, item.level);
     if (state.money >= cost) {
         state.money -= cost;
