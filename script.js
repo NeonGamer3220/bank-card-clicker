@@ -8,35 +8,51 @@ const state = {
         betterPlastic: { level: 0, baseCost: 50, costMult: 1.5, effect: 1, name: "Better Plastic", desc: "+$1/click", icon: "fa-credit-card" },
         goldChip: { level: 0, baseCost: 500, costMult: 1.8, effect: 10, name: "Gold Chip", desc: "+$10/click", icon: "fa-microchip" },
         platinumCard: { level: 0, baseCost: 5000, costMult: 2, effect: 100, name: "Platinum Card", desc: "+$100/click", icon: "fa-gem" },
-        blackCard: { level: 0, baseCost: 100000, costMult: 2.5, effect: 2500, name: "Black Card", desc: "+$2,500/click", icon: "fa-crown" }
+        blackCard: { level: 0, baseCost: 100000, costMult: 2.5, effect: 2500, name: "Black Card", desc: "+$2,500/click", icon: "fa-crown" },
+        diamondCard: { level: 0, baseCost: 5000000, costMult: 3, effect: 50000, name: "Diamond Card", desc: "+$50,000/click", icon: "fa-gem" },
+        quantumCard: { level: 0, baseCost: 250000000, costMult: 3.5, effect: 1000000, name: "Quantum Card", desc: "+$1,000,000/click", icon: "fa-atom" }
     },
     companies: {
         lemonadeStand: { level: 0, baseCost: 100, costMult: 1.15, effect: 1, name: "Lemonade Stand", desc: "+$1/sec", icon: "fa-lemon" },
-        onlineStore: { level: 0, baseCost: 1000, costMult: 1.2, effect: 15, name: "Online Store", desc: "+$15/sec", icon: "fa-store" },
-        techStartup: { level: 0, baseCost: 15000, costMult: 1.25, effect: 250, name: "Tech Startup", desc: "+$250/sec", icon: "fa-laptop-code" },
-        megaCorp: { level: 0, baseCost: 500000, costMult: 1.3, effect: 10000, name: "Mega Corp", desc: "+$10,000/sec", icon: "fa-city" }
+        newspaperRoute: { level: 0, baseCost: 500, costMult: 1.18, effect: 5, name: "Newspaper Route", desc: "+$5/sec", icon: "fa-newspaper" },
+        onlineStore: { level: 0, baseCost: 2500, costMult: 1.2, effect: 30, name: "Online Store", desc: "+$30/sec", icon: "fa-store" },
+        carWash: { level: 0, baseCost: 10000, costMult: 1.22, effect: 150, name: "Car Wash", desc: "+$150/sec", icon: "fa-car-side" },
+        techStartup: { level: 0, baseCost: 50000, costMult: 1.25, effect: 800, name: "Tech Startup", desc: "+$800/sec", icon: "fa-laptop-code" },
+        cryptoMine: { level: 0, baseCost: 250000, costMult: 1.28, effect: 4500, name: "Crypto Mine", desc: "+$4,500/sec", icon: "fa-bitcoin" },
+        megaCorp: { level: 0, baseCost: 1500000, costMult: 1.3, effect: 30000, name: "Mega Corp", desc: "+$30,000/sec", icon: "fa-city" },
+        spaceAgency: { level: 0, baseCost: 10000000, costMult: 1.35, effect: 250000, name: "Space Agency", desc: "+$250,000/sec", icon: "fa-rocket" },
+        aiOverlord: { level: 0, baseCost: 100000000, costMult: 1.4, effect: 3000000, name: "AI Overlord", desc: "+$3,000,000/sec", icon: "fa-robot" }
     },
     realEstate: {
-        apartment: { level: 0, baseCost: 5000, costMult: 1.2, effect: 50, name: "Apartment", desc: "+$50/sec", icon: "fa-building" },
-        house: { level: 0, baseCost: 50000, costMult: 1.25, effect: 600, name: "House", desc: "+$600/sec", icon: "fa-house" },
-        mansion: { level: 0, baseCost: 1000000, costMult: 1.3, effect: 15000, name: "Mansion", desc: "+$15,000/sec", icon: "fa-house-chimney-window" },
-        privateIsland: { level: 0, baseCost: 50000000, costMult: 1.4, effect: 1000000, name: "Private Island", desc: "+$1,000,000/sec", icon: "fa-umbrella-beach" }
+        tent: { level: 0, baseCost: 1000, costMult: 1.15, effect: 10, name: "Tent", desc: "+$10/sec", icon: "fa-campground" },
+        apartment: { level: 0, baseCost: 15000, costMult: 1.2, effect: 200, name: "Apartment", desc: "+$200/sec", icon: "fa-building" },
+        house: { level: 0, baseCost: 100000, costMult: 1.25, effect: 1500, name: "House", desc: "+$1,500/sec", icon: "fa-house" },
+        mansion: { level: 0, baseCost: 2500000, costMult: 1.3, effect: 40000, name: "Mansion", desc: "+$40,000/sec", icon: "fa-house-chimney-window" },
+        skyscraper: { level: 0, baseCost: 50000000, costMult: 1.35, effect: 1000000, name: "Skyscraper", desc: "+$1,000,000/sec", icon: "fa-building-user" },
+        privateIsland: { level: 0, baseCost: 500000000, costMult: 1.4, effect: 15000000, name: "Private Island", desc: "+$15,000,000/sec", icon: "fa-umbrella-beach" },
+        moonBase: { level: 0, baseCost: 10000000000, costMult: 1.5, effect: 500000000, name: "Moon Base", desc: "+$500,000,000/sec", icon: "fa-moon" }
     },
     shop: {
         usedCar: { owned: false, cost: 10000, name: "Used Car", desc: "A rusty old car.", icon: "fa-car-side" },
         sportsCar: { owned: false, cost: 250000, name: "Sports Car", desc: "Vroom vroom!", icon: "fa-car-burst" },
+        superCar: { owned: false, cost: 1500000, name: "Super Car", desc: "0 to 60 in 2 seconds.", icon: "fa-car" },
         yacht: { owned: false, cost: 5000000, name: "Yacht", desc: "Sail the seas.", icon: "fa-ship" },
-        privateJet: { owned: false, cost: 50000000, name: "Private Jet", desc: "Fly anywhere.", icon: "fa-plane" }
+        privateJet: { owned: false, cost: 50000000, name: "Private Jet", desc: "Fly anywhere.", icon: "fa-plane" },
+        sportsTeam: { owned: false, cost: 2000000000, name: "Sports Team", desc: "Own a franchise.", icon: "fa-basketball" },
+        smallCountry: { owned: false, cost: 50000000000, name: "Small Country", desc: "Rule your own nation.", icon: "fa-flag" }
     },
     stocks: {
         tech: { price: 100, owned: 0, name: "Tech Co.", history: [] },
         food: { price: 50, owned: 0, name: "Food Inc.", history: [] },
-        energy: { price: 200, owned: 0, name: "Energy Corp.", history: [] }
+        energy: { price: 200, owned: 0, name: "Energy Corp.", history: [] },
+        crypto: { price: 500, owned: 0, name: "KiloCoin", history: [] },
+        space: { price: 1000, owned: 0, name: "AstroX", history: [] }
     },
     rewards: {
         firstThousand: { unlocked: false, req: 1000, name: "Thousandaire", desc: "Reach $1,000", icon: "fa-coins" },
         firstMillion: { unlocked: false, req: 1000000, name: "Millionaire", desc: "Reach $1,000,000", icon: "fa-sack-dollar" },
-        firstBillion: { unlocked: false, req: 1000000000, name: "Billionaire", desc: "Reach $1,000,000,000", icon: "fa-vault" }
+        firstBillion: { unlocked: false, req: 1000000000, name: "Billionaire", desc: "Reach $1,000,000,000", icon: "fa-vault" },
+        firstTrillion: { unlocked: false, req: 1000000000000, name: "Trillionaire", desc: "Reach $1,000,000,000,000", icon: "fa-money-bill-trend-up" }
     }
 };
 
@@ -83,12 +99,14 @@ function getCost(baseCost, costMult, level) {
 // Render generic list (Upgrades, Companies, Real Estate)
 function renderList(items, container, buyFunction) {
     container.innerHTML = '';
+    let index = 0;
     for (const key in items) {
         const item = items[key];
         const cost = getCost(item.baseCost, item.costMult, item.level);
         
         const div = document.createElement('div');
         div.className = 'item';
+        div.style.animationDelay = `${index * 0.05}s`;
         div.innerHTML = `
             <div class="item-info">
                 <span class="item-name"><i class="fa-solid ${item.icon}"></i> ${item.name} (Lvl ${item.level})</span>
@@ -98,6 +116,7 @@ function renderList(items, container, buyFunction) {
             <button class="buy-btn" ${state.money < cost ? 'disabled' : ''} onclick="${buyFunction.name}('${key}')">Buy</button>
         `;
         container.appendChild(div);
+        index++;
     }
 }
 
