@@ -11,11 +11,15 @@
     <div class="container">
         <header>
             <h1><i class="fa-solid fa-money-bill-wave"></i> Bank Card Clicker</h1>
-            <div class="stats">
+            <div class="stats-bar">
                 <p><i class="fa-solid fa-wallet"></i> Money: $<span id="money">0</span></p>
                 <p><i class="fa-solid fa-hand-pointer"></i> Money per Click: $<span id="money-per-click">1</span></p>
                 <p><i class="fa-solid fa-stopwatch"></i> Money per Second: $<span id="money-per-second">0</span></p>
                 <p><i class="fa-solid fa-medal"></i> Title: <span id="current-title">Broke</span></p>
+                <div class="code-input-container">
+                    <input type="text" id="code-input" placeholder="Enter Code">
+                    <button onclick="redeemCode(document.getElementById('code-input').value)">Redeem</button>
+                </div>
             </div>
         </header>
 

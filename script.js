@@ -4,6 +4,9 @@ const state = {
     moneyPerSecond: 0,
     title: "Broke",
     lastSaved: Date.now(),
+    activeEvent: null,
+    eventEndTime: 0,
+    adminPanelEnabled: false,
     upgrades: {
         betterPlastic: { level: 0, baseCost: 50, costMult: 1.5, effect: 1, name: "Better Plastic", desc: "+$1/click", icon: "fa-credit-card" },
         goldChip: { level: 0, baseCost: 500, costMult: 1.8, effect: 10, name: "Gold Chip", desc: "+$10/click", icon: "fa-microchip" },
@@ -347,15 +350,117 @@ bankCard.addEventListener('click', (e) => {
     updateUI();
 });
 
+// Event System
+function startRandomEvent() {
+    if (state.activeEvent) return; // Event already running
+
+    const events = [
+        { name: "2x Money!", type: "money", multiplier: 2, color: "#10b981" },
+        { name: "2x Upgrades!", type: "upgrade", multiplier: 2, color: "#3b82f6" }
+    ];
+
+    const event = events[Math.floor(Math.random() * events.length)];
+    const duration = Math.floor(Math.random() * 11000) + 20000; // 20-31 seconds
+
+    state.activeEvent = event;
+    state.eventEndTime = Date.now() + duration;
+
+    showEventNotification(event.name, event.color);
+}
+
+function checkEvent() {
+    if (state.activeEvent && Date.now() > state.eventEndTime) {
+        state.activeEvent = null;
+        showEventNotification("Event Ended", "#ef4444");
+    }
+}
+
+function showEventNotification(text, color) {
+    const notif = document.createElement('div');
+    notif.innerText = text;
+    notif.style.position = 'fixed';
+    notif.style.top = '20px';
+    notif.style.left = '50%';
+    notif.style.transform = 'translateX(-50%)';
+    notif.style.backgroundColor = color;
+    notif.style.color = 'white';
+    notif.style.padding = '10px 20px';
+    notif.style.borderRadius = '5px';
+    notif.style.fontWeight = 'bold';
+    notif.style.zIndex = '10000';
+    notif.style.animation = 'fadeInOut 3s forwards';
+    document.body.appendChild(notif);
+    setTimeout(() => notif.remove(), 3000);
+}
+
+// Code System
+function redeemCode(code) {
+    switch(code.toLowerCase()) {
+        case 'release':
+            state.money += 5000;
+            alert("Code Redeemed! +$5,000");
+            updateUI();
+            break;
+        case 'neonthebest':
+            if (!state.adminPanelEnabled) {
+                state.adminPanelEnabled = true;
+                alert("Admin Panel Unlocked! Check the stats bar.");
+                renderAdminPanel();
+            } else {
+                alert("Admin Panel already unlocked!");
+            }
+            updateUI();
+            break;
+        case 'endschool':
+            state.money += 30000;
+            alert("Code Redeemed! +$30,000");
+            updateUI();
+            break;
+        default:
+            alert("Invalid Code!");
+    }
+}
+
+function renderAdminPanel() {
+    if (state.adminPanelEnabled) {
+        const stats = document.querySelector('.stats');
+        const adminBtn = document.createElement('button');
+        adminBtn.innerHTML = '<i class="fa-solid fa-user-gear"></i> Admin';
+        adminBtn.style.marginLeft = '20px';
+        adminBtn.style.background = '#ef4444';
+        adminBtn.style.border = 'none';
+        adminBtn.style.color = 'white';
+        adminBtn.style.padding = '5px 10px';
+        adminBtn.style.borderRadius = '5px';
+        adminBtn.style.cursor = 'pointer';
+        adminBtn.onclick = () => {
+            const amount = prompt("Enter amount to add:");
+            if(amount) state.money += parseInt(amount);
+            updateUI();
+        };
+        stats.appendChild(adminBtn);
+    }
+}
+
 // Game Loop
 setInterval(() => {
-    state.money += state.moneyPerSecond;
+    if (state.activeEvent && state.activeEvent.type === "money") {
+        state.money += state.moneyPerSecond * state.activeEvent.multiplier;
+    } else {
+        state.money += state.moneyPerSecond;
+    }
+    checkEvent();
     updateUI();
     saveGame();
 }, 1000);
 
 // Stock Market Loop
 setInterval(updateStocks, 5000);
+
+// Event Loop (Every 2-3 minutes)
+setInterval(() => {
+    startRandomEvent();
+}, Math.floor(Math.random() * 60000) + 120000);
 
 // Save and Load
 function saveGame() {
