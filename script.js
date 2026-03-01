@@ -85,12 +85,21 @@ const state = {
     }
 };
 
-// Supabase Config - with safety check
+// Supabase Config - wait for library to load
 let supabase = null;
-if (window.supabase) {
-    const SUPABASE_URL = 'https://szmerwsuwbaljeedrlxi.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN6bWVyd3N1d2JhbGplZWRybHhpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzNzU0MTEsImV4cCI6MjA4Nzk1MTQxMX0.YjUs1aWwsIBETh57zk8G5_Z9wEPlsyV0chiGUmLqLgw';
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const initSupabase = () => {
+    if (window.supabase) {
+        const SUPABASE_URL = 'https://szmerwsuwbaljeedrlxi.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN6bWVyd3N1d2JhbGplZWRybHhpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzNzU0MTEsImV4cCI6MjA4Nzk1MTQxMX0.YjUs1aWwsIBETh57zk8G5_Z9wEPlsyV0chiGUmLqLgw';
+        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    }
+};
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSupabase);
+} else {
+    initSupabase();
 }
 
 // DOM Elements
