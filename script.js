@@ -29,28 +29,46 @@ const state = {
     },
     realEstate: {
         tent: { level: 0, baseCost: 1000, costMult: 1.15, effect: 10, name: "Tent", desc: "+$10/sec", icon: "fa-campground" },
+        tinyHome: { level: 0, baseCost: 5000, costMult: 1.18, effect: 75, name: "Tiny Home", desc: "+$75/sec", icon: "fa-house-medical" },
         apartment: { level: 0, baseCost: 15000, costMult: 1.2, effect: 200, name: "Apartment", desc: "+$200/sec", icon: "fa-building" },
+        townhouse: { level: 0, baseCost: 50000, costMult: 1.22, effect: 800, name: "Townhouse", desc: "+$800/sec", icon: "fa-building-ngo" },
         house: { level: 0, baseCost: 100000, costMult: 1.25, effect: 1500, name: "House", desc: "+$1,500/sec", icon: "fa-house" },
+        duplex: { level: 0, baseCost: 350000, costMult: 1.27, effect: 5000, name: "Duplex", desc: "+$5,000/sec", icon: "fa-building" },
         mansion: { level: 0, baseCost: 2500000, costMult: 1.3, effect: 40000, name: "Mansion", desc: "+$40,000/sec", icon: "fa-house-chimney-window" },
+        penthouse: { level: 0, baseCost: 10000000, costMult: 1.32, effect: 150000, name: "Penthouse", desc: "+$150,000/sec", icon: "fa-hotel" },
         skyscraper: { level: 0, baseCost: 50000000, costMult: 1.35, effect: 1000000, name: "Skyscraper", desc: "+$1,000,000/sec", icon: "fa-building-user" },
         privateIsland: { level: 0, baseCost: 500000000, costMult: 1.4, effect: 15000000, name: "Private Island", desc: "+$15,000,000/sec", icon: "fa-umbrella-beach" },
-        moonBase: { level: 0, baseCost: 10000000000, costMult: 1.5, effect: 500000000, name: "Moon Base", desc: "+$500,000,000/sec", icon: "fa-moon" }
+        moonBase: { level: 0, baseCost: 10000000000, costMult: 1.5, effect: 500000000, name: "Moon Base", desc: "+$500,000,000/sec", icon: "fa-moon" },
+        marsColony: { level: 0, baseCost: 100000000000, costMult: 1.6, effect: 5000000000, name: "Mars Colony", desc: "+$5B/sec", icon: "fa-mars" }
     },
     shop: {
         usedCar: { owned: false, cost: 10000, name: "Used Car", desc: "A rusty old car.", icon: "fa-car-side" },
+        newCar: { owned: false, cost: 50000, name: "New Car", desc: "Reliable transportation.", icon: "fa-car" },
         sportsCar: { owned: false, cost: 250000, name: "Sports Car", desc: "Vroom vroom!", icon: "fa-car-burst" },
-        superCar: { owned: false, cost: 1500000, name: "Super Car", desc: "0 to 60 in 2 seconds.", icon: "fa-car" },
-        yacht: { owned: false, cost: 5000000, name: "Yacht", desc: "Sail the seas.", icon: "fa-ship" },
+        superCar: { owned: false, cost: 1500000, name: "Super Car", desc: "0 to 60 in 2 seconds.", icon: "fa-gauge-high" },
+        hyperCar: { owned: false, cost: 10000000, name: "Hyper Car", desc: "Faster than sound.", icon: "fa-rocket" },
+        boat: { owned: false, cost: 2500000, name: "Speed Boat", desc: "Zoom across water.", icon: "fa-water" },
+        yacht: { owned: false, cost: 50000000, name: "Yacht", desc: "Sail the seas.", icon: "fa-ship" },
+        cruiseShip: { owned: false, cost: 200000000, name: "Cruise Ship", desc: "A floating city.", icon: "fa-anchor" },
         privateJet: { owned: false, cost: 50000000, name: "Private Jet", desc: "Fly anywhere.", icon: "fa-plane" },
+        privateIsland: { owned: false, cost: 500000000, name: "Private Island", desc: "Your own paradise.", icon: "fa-umbrella-beach" },
         sportsTeam: { owned: false, cost: 2000000000, name: "Sports Team", desc: "Own a franchise.", icon: "fa-basketball" },
-        smallCountry: { owned: false, cost: 50000000000, name: "Small Country", desc: "Rule your own nation.", icon: "fa-flag" }
+        restaurantChain: { owned: false, cost: 5000000000, name: "Restaurant Chain", desc: "Feed the world.", icon: "fa-utensils" },
+        techCompany: { owned: false, cost: 25000000000, name: "Tech Company", desc: "Innovation empire.", icon: "fa-laptop" },
+        smallCountry: { owned: false, cost: 50000000000, name: "Small Country", desc: "Rule your own nation.", icon: "fa-flag" },
+        planet: { owned: false, cost: 1000000000000, name: "Alien Planet", desc: "Own a whole planet!", icon: "fa-globe" }
     },
     stocks: {
         tech: { price: 100, owned: 0, name: "Tech Co.", history: [] },
         food: { price: 50, owned: 0, name: "Food Inc.", history: [] },
         energy: { price: 200, owned: 0, name: "Energy Corp.", history: [] },
         crypto: { price: 500, owned: 0, name: "KiloCoin", history: [] },
-        space: { price: 1000, owned: 0, name: "AstroX", history: [] }
+        space: { price: 1000, owned: 0, name: "AstroX", history: [] },
+        ai: { price: 2500, owned: 0, name: "AI Corp", history: [] },
+        biotech: { price: 3000, owned: 0, name: "BioTech", history: [] },
+        defense: { price: 4000, owned: 0, name: "Defense Co.", history: [] },
+        entertainment: { price: 150, owned: 0, name: "Movie Studio", history: [] },
+        fashion: { price: 80, owned: 0, name: "Fashion Brand", history: [] }
     },
     rewards: {
         first10: { unlocked: false, req: 10, name: "Beginner", desc: "Reach $10", icon: "fa-seedling" },
