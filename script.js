@@ -86,6 +86,30 @@ function updateUI() {
     mpsEl.innerText = formatMoney(state.moneyPerSecond);
     titleEl.innerText = state.title;
 
+    // Render Admin Button if enabled
+    const statsBar = document.querySelector('.stats-bar');
+    if (state.adminPanelEnabled && !document.getElementById('admin-btn')) {
+        const adminBtn = document.createElement('button');
+        adminBtn.id = 'admin-btn';
+        adminBtn.innerHTML = '<i class="fa-solid fa-user-gear"></i> Admin';
+        adminBtn.style.marginLeft = '20px';
+        adminBtn.style.background = '#ef4444';
+        adminBtn.style.border = 'none';
+        adminBtn.style.color = 'white';
+        adminBtn.style.padding = '8px 15px';
+        adminBtn.style.borderRadius = '5px';
+        adminBtn.style.cursor = 'pointer';
+        adminBtn.style.fontWeight = 'bold';
+        adminBtn.onclick = () => {
+            const amount = prompt("Enter amount to add:");
+            if(amount && !isNaN(amount)) {
+                state.money += parseInt(amount);
+                updateUI();
+            }
+        };
+        statsBar.appendChild(adminBtn);
+    }
+
     renderList(state.upgrades, upgradesList, buyUpgrade);
     renderList(state.companies, companiesList, buyCompany);
     renderList(state.realEstate, realEstateList, buyRealEstate);
@@ -404,10 +428,9 @@ function redeemCode(code) {
         case 'neonthebest':
             if (!state.adminPanelEnabled) {
                 state.adminPanelEnabled = true;
-                alert("Admin Panel Unlocked! Check the stats bar.");
-                renderAdminPanel();
+                setTimeout(() => alert("Admin Panel Unlocked! Check the stats bar."), 100);
             } else {
-                alert("Admin Panel already unlocked!");
+                setTimeout(() => alert("Admin Panel already unlocked!"), 100);
             }
             updateUI();
             break;
@@ -421,26 +444,7 @@ function redeemCode(code) {
     }
 }
 
-function renderAdminPanel() {
-    if (state.adminPanelEnabled) {
-        const stats = document.querySelector('.stats');
-        const adminBtn = document.createElement('button');
-        adminBtn.innerHTML = '<i class="fa-solid fa-user-gear"></i> Admin';
-        adminBtn.style.marginLeft = '20px';
-        adminBtn.style.background = '#ef4444';
-        adminBtn.style.border = 'none';
-        adminBtn.style.color = 'white';
-        adminBtn.style.padding = '5px 10px';
-        adminBtn.style.borderRadius = '5px';
-        adminBtn.style.cursor = 'pointer';
-        adminBtn.onclick = () => {
-            const amount = prompt("Enter amount to add:");
-            if(amount) state.money += parseInt(amount);
-            updateUI();
-        };
-        stats.appendChild(adminBtn);
-    }
-}
+
 
 // Game Loop
 setInterval(() => {
