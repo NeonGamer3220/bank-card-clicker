@@ -584,3 +584,14 @@ function loadGame() {
 loadGame();
 recalculateStats();
 updateUI();
+
+// Force name prompt if empty
+if (!state.playerName || state.playerName === "" || state.playerName === "Player") {
+    setTimeout(() => {
+        const name = prompt("Please enter your name for the leaderboard:");
+        if(name && name.trim() !== "") {
+            state.playerName = name.trim();
+            updateUI();
+        }
+    }, 1000);
+}
