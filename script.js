@@ -93,7 +93,9 @@ function updateUI() {
 
     // Render Admin Button if enabled
     const statsBar = document.querySelector('.stats-bar');
-    if (state.adminPanelEnabled && !document.getElementById('admin-btn')) {
+    const existingAdminBtn = document.getElementById('admin-btn');
+    
+    if (state.adminPanelEnabled && !existingAdminBtn) {
         const adminBtn = document.createElement('button');
         adminBtn.id = 'admin-btn';
         adminBtn.innerHTML = '<i class="fa-solid fa-user-gear"></i> Admin';
@@ -105,38 +107,40 @@ function updateUI() {
         adminBtn.style.borderRadius = '5px';
         adminBtn.style.cursor = 'pointer';
         adminBtn.style.fontWeight = 'bold';
+        
         adminBtn.onclick = () => {
-            const action = prompt("Admin Panel Options:\n1. Add Money\n2. Max All Upgrades\n3. Reset Game\n\nEnter 1, 2, or 3:");
-            if (action == '1') {
-                const amount = prompt("Enter amount to add:");
-                if(amount && !isNaN(amount)) {
-                    state.money += parseInt(amount);
-                    updateUI();
-                }
-            } else if (action == '2') {
-                // Max out upgrades
-                for (const key in state.upgrades) {
-                    state.upgrades[key].level += 100;
-                }
-                for (const key in state.companies) {
-                    state.companies[key].level += 100;
-                }
-                for (const key in state.realEstate) {
-                    state.realEstate[key].level += 100;
-                }
-                recalculateStats();
-                updateUI();
-                alert("Upgrades maxed!");
-            } else if (action == '3') {
-                if(confirm("Are you sure you want to reset ALL progress?")) {
-                    // Clear all local storage
-                    localStorage.removeItem('bankCardClickerSave');
-                    localStorage.removeItem('bankClickerLeaderboard');
-                    // Reset state
-                    location.reload();
-                }
-            }
+             const action = prompt("Admin Panel Options:\n1. Add Money\n2. Max All Upgrades\n3. Reset Game\n\nEnter 1, 2, or 3:");
+             if (action == '1') {
+                 const amount = prompt("Enter amount to add:");
+                 if(amount && !isNaN(amount)) {
+                     state.money += parseInt(amount);
+                     updateUI();
+                 }
+             } else if (action == '2') {
+                 // Max out upgrades
+                 for (const key in state.upgrades) {
+                     state.upgrades[key].level += 100;
+                 }
+                 for (const key in state.companies) {
+                     state.companies[key].level += 100;
+                 }
+                 for (const key in state.realEstate) {
+                     state.realEstate[key].level += 100;
+                 }
+                 recalculateStats();
+                 updateUI();
+                 alert("Upgrades maxed!");
+             } else if (action == '3') {
+                 if(confirm("Are you sure you want to reset ALL progress?")) {
+                     // Clear all local storage
+                     localStorage.removeItem('bankCardClickerSave');
+                     localStorage.removeItem('bankClickerLeaderboard');
+                     // Reset state
+                     location.reload();
+                 }
+             }
         };
+        
         statsBar.appendChild(adminBtn);
     }
 
