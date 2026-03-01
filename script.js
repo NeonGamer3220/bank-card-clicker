@@ -104,22 +104,29 @@ function updateUI() {
         adminBtn.style.fontWeight = 'bold';
         adminBtn.onclick = () => {
             const action = prompt("Admin Panel Options:\n1. Add Money\n2. Max All Upgrades\n3. Reset Game\n\nEnter 1, 2, or 3:");
-            if (action === '1') {
+            if (action == '1') {
                 const amount = prompt("Enter amount to add:");
                 if(amount && !isNaN(amount)) {
                     state.money += parseInt(amount);
                     updateUI();
                 }
-            } else if (action === '2') {
-                for (const key in state.upgrades) state.upgrades[key].level += 10;
-                for (const key in state.companies) state.companies[key].level += 10;
-                for (const key in state.realEstate) state.realEstate[key].level += 10;
+            } else if (action == '2') {
+                // Max out upgrades
+                for (const key in state.upgrades) {
+                    state.upgrades[key].level += 100;
+                }
+                for (const key in state.companies) {
+                    state.companies[key].level += 100;
+                }
+                for (const key in state.realEstate) {
+                    state.realEstate[key].level += 100;
+                }
                 recalculateStats();
                 updateUI();
-                alert("Maxed out!");
-            } else if (action === '3') {
+                alert("Upgrades maxed!");
+            } else if (action == '3') {
                 if(confirm("Are you sure you want to reset ALL progress?")) {
-                    localStorage.removeItem('bankCardClickerSave');
+                    localStorage.clear();
                     location.reload();
                 }
             }
@@ -559,6 +566,17 @@ function loadGame() {
                 alert(`Welcome back! You earned $${formatMoney(offlineEarnings)} while you were offline.`);
             }
         }
+    } else {
+        // First time playing - ask for name
+        setTimeout(() => {
+            const name = prompt("Welcome! Please enter your name for the leaderboard:");
+            if(name && name.trim() !== "") {
+                state.playerName = name.trim();
+            } else {
+                state.playerName = "Player";
+            }
+            updateUI();
+        }, 500);
     }
 }
 
