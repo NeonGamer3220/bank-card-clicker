@@ -130,15 +130,31 @@ function updateUI() {
                  recalculateStats();
                  updateUI();
                  alert("Upgrades maxed!");
-             } else if (action == '3') {
-                 if(confirm("Are you sure you want to reset ALL progress?")) {
-                     // Clear all local storage
-                     localStorage.removeItem('bankCardClickerSave');
-                     localStorage.removeItem('bankClickerLeaderboard');
-                     // Reset state
-                     location.reload();
-                 }
-             }
+            } else if (action == '3') {
+                // Clear all local storage
+                localStorage.clear();
+                // Reset state manually without reloading immediately
+                state.money = 0;
+                state.moneyPerClick = 1;
+                state.moneyPerSecond = 0;
+                state.activeEvent = null;
+                state.eventEndTime = 0;
+                state.adminPanelEnabled = false;
+                
+                // Reset upgrades, companies, real estate
+                for (const key in state.upgrades) state.upgrades[key].level = 0;
+                for (const key in state.companies) state.companies[key].level = 0;
+                for (const key in state.realEstate) state.realEstate[key].level = 0;
+                for (const key in state.shop) state.shop[key].owned = false;
+                
+                // Clear save and leaderboard
+                localStorage.removeItem('bankCardClickerSave');
+                localStorage.removeItem('bankClickerLeaderboard');
+                
+                recalculateStats();
+                updateUI();
+                alert("Game Reset!");
+            }
         };
         
         statsBar.appendChild(adminBtn);
