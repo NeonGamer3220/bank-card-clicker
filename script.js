@@ -4,6 +4,7 @@ const state = {
     moneyPerSecond: 0,
     title: "Broke",
     lastSaved: Date.now(),
+    playerName: "Player",
     activeEvent: null,
     eventEndTime: 0,
     adminPanelEnabled: false,
@@ -72,6 +73,7 @@ const realEstateList = document.getElementById('real-estate-list');
 const shopList = document.getElementById('shop-list');
 const stockList = document.getElementById('stock-list');
 const rewardsList = document.getElementById('rewards-list');
+const leaderboardList = document.getElementById('leaderboard-list');
 
 // Format numbers
 function formatMoney(num) {
@@ -101,10 +103,25 @@ function updateUI() {
         adminBtn.style.cursor = 'pointer';
         adminBtn.style.fontWeight = 'bold';
         adminBtn.onclick = () => {
-            const amount = prompt("Enter amount to add:");
-            if(amount && !isNaN(amount)) {
-                state.money += parseInt(amount);
+            const action = prompt("Admin Panel Options:\n1. Add Money\n2. Max All Upgrades\n3. Reset Game\n\nEnter 1, 2, or 3:");
+            if (action === '1') {
+                const amount = prompt("Enter amount to add:");
+                if(amount && !isNaN(amount)) {
+                    state.money += parseInt(amount);
+                    updateUI();
+                }
+            } else if (action === '2') {
+                for (const key in state.upgrades) state.upgrades[key].level += 10;
+                for (const key in state.companies) state.companies[key].level += 10;
+                for (const key in state.realEstate) state.realEstate[key].level += 10;
+                recalculateStats();
                 updateUI();
+                alert("Maxed out!");
+            } else if (action === '3') {
+                if(confirm("Are you sure you want to reset ALL progress?")) {
+                    localStorage.removeItem('bankCardClickerSave');
+                    location.reload();
+                }
             }
         };
         statsBar.appendChild(adminBtn);
@@ -116,6 +133,7 @@ function updateUI() {
     renderShop();
     renderStocks();
     renderRewards();
+    renderLeaderboard();
 }
 
 // Calculate Costs
@@ -233,6 +251,24 @@ function renderRewards() {
         `;
         rewardsList.appendChild(div);
     }
+}
+
+function renderLeaderboard() {
+    const leaderboard = updateLeaderboard();
+    leaderboardList.innerHTML = '';
+    leaderboard.forEach((player, index) => {
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.style.opacity = player.name === state.playerName ? '1' : '0.7';
+        div.innerHTML = `
+            <div class="item-info">
+                <span class="item-name"><i class="fa-solid fa-user"></i> #${index + 1} ${player.name}</span>
+                <span class="item-desc">${player.name === state.playerName ? 'You' : ''}</span>
+            </div>
+            <span style="color: var(--primary); font-weight: bold;">$${formatMoney(player.money)}</span>
+        `;
+        leaderboardList.appendChild(div);
+    });
 }
 
 // Buy Functions
@@ -425,6 +461,11 @@ function redeemCode(code) {
             alert("Code Redeemed! +$5,000");
             updateUI();
             break;
+        case 'foxygoated':
+            state.money += 100000;
+            alert("Code Redeemed! +$100,000");
+            updateUI();
+            break;
         case 'neonthebest':
             if (!state.adminPanelEnabled) {
                 state.adminPanelEnabled = true;
@@ -439,9 +480,39 @@ function redeemCode(code) {
             alert("Code Redeemed! +$30,000");
             updateUI();
             break;
+        case 'setname':
+            const name = prompt("Enter your name:");
+            if(name) {
+                state.playerName = name;
+                alert("Name set to: " + name);
+            }
+            updateUI();
+            break;
         default:
             alert("Invalid Code!");
     }
+}
+
+// Leaderboard System
+function updateLeaderboard() {
+    let leaderboard = JSON.parse(localStorage.getItem('bankClickerLeaderboard')) || [];
+    
+    // Add current player
+    const existingIndex = leaderboard.findIndex(p => p.name === state.playerName);
+    if (existingIndex > -1) {
+        leaderboard[existingIndex].money = Math.max(leaderboard[existingIndex].money, state.money);
+    } else {
+        leaderboard.push({ name: state.playerName, money: state.money });
+    }
+    
+    // Sort by money desc
+    leaderboard.sort((a, b) => b.money - a.money);
+    
+    // Keep top 10
+    leaderboard = leaderboard.slice(0, 10);
+    
+    localStorage.setItem('bankClickerLeaderboard', JSON.stringify(leaderboard));
+    return leaderboard;
 }
 
 
