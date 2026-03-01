@@ -85,13 +85,10 @@ const state = {
     }
 };
 
-// Supabase Config - with safety check
-let supabase = null;
-if (window.supabase) {
-    const SUPABASE_URL = 'https://szmerwsuwbaljeedrlxi.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN6bWVyd3N1d2JhbGplZWRybHhpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzNzU0MTEsImV4cCI6MjA4Nzk1MTQxMX0.YjUs1aWwsIBETh57zk8G5_Z9wEPlsyV0chiGUmLqLgw';
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-}
+// Supabase Config
+const SUPABASE_URL = 'https://szmerwsuwbaljeedrlxi.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN6bWVyd3N1d2JhbGplZWRybHhpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzNzU0MTEsImV4cCI6MjA4Nzk1MTQxMX0.YjUs1aWwsIBETh57zk8G5_Z9wEPlsyV0chiGUmLqLgw';
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // DOM Elements
 const moneyEl = document.getElementById('money');
@@ -639,23 +636,20 @@ setInterval(() => {
 async function saveGame() {
     state.lastSaved = Date.now();
     localStorage.setItem('bankCardClickerSave', JSON.stringify(state));
-    
-    if (supabase) {
-        try {
-            await supabase.rpc('save_player', {
-                p_player_name: state.playerName,
-                p_money: state.money,
-                p_money_per_click: state.moneyPerClick,
-                p_money_per_second: state.moneyPerSecond,
-                p_current_title: state.title,
-                p_upgrades: JSON.stringify(state.upgrades),
-                p_companies: JSON.stringify(state.companies),
-                p_houses: JSON.stringify(state.realEstate),
-                p_shop: JSON.stringify(state.shop),
-                p_stocks: JSON.stringify(state.stocks)
-            });
-        } catch(e) {}
-    }
+    try {
+        await supabase.rpc('save_player', {
+            p_player_name: state.playerName,
+            p_money: state.money,
+            p_money_per_click: state.moneyPerClick,
+            p_money_per_second: state.moneyPerSecond,
+            p_current_title: state.title,
+            p_upgrades: JSON.stringify(state.upgrades),
+            p_companies: JSON.stringify(state.companies),
+            p_houses: JSON.stringify(state.realEstate),
+            p_shop: JSON.stringify(state.shop),
+            p_stocks: JSON.stringify(state.stocks)
+        });
+    } catch(e) {}
 }
 
 async function loadGame() {
@@ -687,25 +681,23 @@ async function loadGame() {
     
     // Try to load from Supabase (disabled for now)
     /*
-    if (supabase) {
-        try {
-            const { data } = await supabase.rpc('get_player', { p_player_name: state.playerName });
-            if (data && data.length > 0 && data[0].money > 0) {
-                const p = data[0];
-                state.money = p.money;
-                state.moneyPerClick = p.money_per_click;
-                state.moneyPerSecond = p.money_per_second;
-                state.title = p.current_title;
-                state.upgrades = JSON.parse(p.upgrades);
-                state.companies = JSON.parse(p.companies);
-                state.realEstate = JSON.parse(p.houses);
-                state.shop = JSON.parse(p.shop);
-                state.stocks = JSON.parse(p.stocks);
-                localStorage.setItem('bankCardClickerSave', JSON.stringify(state));
-                console.log('Loaded from cloud!');
-            }
-        } catch(e) {}
-    }
+    try {
+        const { data } = await supabase.rpc('get_player', { p_player_name: state.playerName });
+        if (data && data.length > 0 && data[0].money > 0) {
+            const p = data[0];
+            state.money = p.money;
+            state.moneyPerClick = p.money_per_click;
+            state.moneyPerSecond = p.money_per_second;
+            state.title = p.current_title;
+            state.upgrades = JSON.parse(p.upgrades);
+            state.companies = JSON.parse(p.companies);
+            state.realEstate = JSON.parse(p.houses);
+            state.shop = JSON.parse(p.shop);
+            state.stocks = JSON.parse(p.stocks);
+            localStorage.setItem('bankCardClickerSave', JSON.stringify(state));
+            console.log('Loaded from cloud!');
+        }
+    } catch(e) {}
     */
 }
 
