@@ -679,10 +679,10 @@ async function loadGame() {
         }, 500);
     }
     
-    // Try to load from Supabase
+    // Try to load from Supabase (only if player has played before)
     try {
         const { data } = await supabase.rpc('get_player', { p_player_name: state.playerName });
-        if (data && data.length > 0) {
+        if (data && data.length > 0 && data[0].money > 0) {
             const p = data[0];
             state.money = p.money;
             state.moneyPerClick = p.money_per_click;
@@ -694,6 +694,7 @@ async function loadGame() {
             state.shop = JSON.parse(p.shop);
             state.stocks = JSON.parse(p.stocks);
             localStorage.setItem('bankCardClickerSave', JSON.stringify(state));
+            console.log('Loaded from cloud!');
         }
     } catch(e) {}
 }
