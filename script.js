@@ -5,28 +5,28 @@ const state = {
     title: "Broke",
     lastSaved: Date.now(),
     upgrades: {
-        betterPlastic: { level: 0, baseCost: 50, costMult: 1.5, effect: 1, name: "Better Plastic", desc: "+$1/click" },
-        goldChip: { level: 0, baseCost: 500, costMult: 1.8, effect: 10, name: "Gold Chip", desc: "+$10/click" },
-        platinumCard: { level: 0, baseCost: 5000, costMult: 2, effect: 100, name: "Platinum Card", desc: "+$100/click" },
-        blackCard: { level: 0, baseCost: 100000, costMult: 2.5, effect: 2500, name: "Black Card", desc: "+$2,500/click" }
+        betterPlastic: { level: 0, baseCost: 50, costMult: 1.5, effect: 1, name: "Better Plastic", desc: "+$1/click", icon: "fa-credit-card" },
+        goldChip: { level: 0, baseCost: 500, costMult: 1.8, effect: 10, name: "Gold Chip", desc: "+$10/click", icon: "fa-microchip" },
+        platinumCard: { level: 0, baseCost: 5000, costMult: 2, effect: 100, name: "Platinum Card", desc: "+$100/click", icon: "fa-gem" },
+        blackCard: { level: 0, baseCost: 100000, costMult: 2.5, effect: 2500, name: "Black Card", desc: "+$2,500/click", icon: "fa-crown" }
     },
     companies: {
-        lemonadeStand: { level: 0, baseCost: 100, costMult: 1.15, effect: 1, name: "Lemonade Stand", desc: "+$1/sec" },
-        onlineStore: { level: 0, baseCost: 1000, costMult: 1.2, effect: 15, name: "Online Store", desc: "+$15/sec" },
-        techStartup: { level: 0, baseCost: 15000, costMult: 1.25, effect: 250, name: "Tech Startup", desc: "+$250/sec" },
-        megaCorp: { level: 0, baseCost: 500000, costMult: 1.3, effect: 10000, name: "Mega Corp", desc: "+$10,000/sec" }
+        lemonadeStand: { level: 0, baseCost: 100, costMult: 1.15, effect: 1, name: "Lemonade Stand", desc: "+$1/sec", icon: "fa-lemon" },
+        onlineStore: { level: 0, baseCost: 1000, costMult: 1.2, effect: 15, name: "Online Store", desc: "+$15/sec", icon: "fa-store" },
+        techStartup: { level: 0, baseCost: 15000, costMult: 1.25, effect: 250, name: "Tech Startup", desc: "+$250/sec", icon: "fa-laptop-code" },
+        megaCorp: { level: 0, baseCost: 500000, costMult: 1.3, effect: 10000, name: "Mega Corp", desc: "+$10,000/sec", icon: "fa-city" }
     },
     realEstate: {
-        apartment: { level: 0, baseCost: 5000, costMult: 1.2, effect: 50, name: "Apartment", desc: "+$50/sec" },
-        house: { level: 0, baseCost: 50000, costMult: 1.25, effect: 600, name: "House", desc: "+$600/sec" },
-        mansion: { level: 0, baseCost: 1000000, costMult: 1.3, effect: 15000, name: "Mansion", desc: "+$15,000/sec" },
-        privateIsland: { level: 0, baseCost: 50000000, costMult: 1.4, effect: 1000000, name: "Private Island", desc: "+$1,000,000/sec" }
+        apartment: { level: 0, baseCost: 5000, costMult: 1.2, effect: 50, name: "Apartment", desc: "+$50/sec", icon: "fa-building" },
+        house: { level: 0, baseCost: 50000, costMult: 1.25, effect: 600, name: "House", desc: "+$600/sec", icon: "fa-house" },
+        mansion: { level: 0, baseCost: 1000000, costMult: 1.3, effect: 15000, name: "Mansion", desc: "+$15,000/sec", icon: "fa-house-chimney-window" },
+        privateIsland: { level: 0, baseCost: 50000000, costMult: 1.4, effect: 1000000, name: "Private Island", desc: "+$1,000,000/sec", icon: "fa-umbrella-beach" }
     },
     shop: {
-        usedCar: { owned: false, cost: 10000, name: "Used Car", desc: "A rusty old car." },
-        sportsCar: { owned: false, cost: 250000, name: "Sports Car", desc: "Vroom vroom!" },
-        yacht: { owned: false, cost: 5000000, name: "Yacht", desc: "Sail the seas." },
-        privateJet: { owned: false, cost: 50000000, name: "Private Jet", desc: "Fly anywhere." }
+        usedCar: { owned: false, cost: 10000, name: "Used Car", desc: "A rusty old car.", icon: "fa-car-side" },
+        sportsCar: { owned: false, cost: 250000, name: "Sports Car", desc: "Vroom vroom!", icon: "fa-car-burst" },
+        yacht: { owned: false, cost: 5000000, name: "Yacht", desc: "Sail the seas.", icon: "fa-ship" },
+        privateJet: { owned: false, cost: 50000000, name: "Private Jet", desc: "Fly anywhere.", icon: "fa-plane" }
     },
     stocks: {
         tech: { price: 100, owned: 0, name: "Tech Co.", history: [] },
@@ -34,9 +34,9 @@ const state = {
         energy: { price: 200, owned: 0, name: "Energy Corp.", history: [] }
     },
     rewards: {
-        firstThousand: { unlocked: false, req: 1000, name: "Thousandaire", desc: "Reach $1,000" },
-        firstMillion: { unlocked: false, req: 1000000, name: "Millionaire", desc: "Reach $1,000,000" },
-        firstBillion: { unlocked: false, req: 1000000000, name: "Billionaire", desc: "Reach $1,000,000,000" }
+        firstThousand: { unlocked: false, req: 1000, name: "Thousandaire", desc: "Reach $1,000", icon: "fa-coins" },
+        firstMillion: { unlocked: false, req: 1000000, name: "Millionaire", desc: "Reach $1,000,000", icon: "fa-sack-dollar" },
+        firstBillion: { unlocked: false, req: 1000000000, name: "Billionaire", desc: "Reach $1,000,000,000", icon: "fa-vault" }
     }
 };
 
@@ -91,7 +91,7 @@ function renderList(items, container, buyFunction) {
         div.className = 'item';
         div.innerHTML = `
             <div class="item-info">
-                <span class="item-name">${item.name} (Lvl ${item.level})</span>
+                <span class="item-name"><i class="fa-solid ${item.icon}"></i> ${item.name} (Lvl ${item.level})</span>
                 <span class="item-desc">${item.desc}</span>
                 <span class="item-cost">$${formatMoney(cost)}</span>
             </div>
@@ -110,7 +110,7 @@ function renderShop() {
         div.className = 'item';
         div.innerHTML = `
             <div class="item-info">
-                <span class="item-name">${item.name}</span>
+                <span class="item-name"><i class="fa-solid ${item.icon}"></i> ${item.name}</span>
                 <span class="item-desc">${item.desc}</span>
                 <span class="item-cost">${item.owned ? 'Owned' : '$' + formatMoney(item.cost)}</span>
             </div>
@@ -127,9 +127,29 @@ function renderStocks() {
     stockList.innerHTML = '';
     for (const key in state.stocks) {
         const stock = state.stocks[key];
-        const prevPrice = stock.history.length > 0 ? stock.history[stock.history.length - 1] : stock.price;
+        const prevPrice = stock.history.length > 1 ? stock.history[stock.history.length - 2] : stock.price;
         const priceClass = stock.price >= prevPrice ? 'price-up' : 'price-down';
         const arrow = stock.price >= prevPrice ? '▲' : '▼';
+
+        // Generate sparkline HTML
+        let sparklineHTML = '<div class="sparkline">';
+        if (stock.history.length > 0) {
+            const maxPrice = Math.max(...stock.history, stock.price);
+            const minPrice = Math.min(...stock.history, stock.price);
+            const range = maxPrice - minPrice || 1;
+            
+            const allPoints = [...stock.history];
+            if (allPoints.length < 10) {
+                // Pad with current price if history is short
+                while(allPoints.length < 10) allPoints.unshift(allPoints[0]);
+            }
+            
+            allPoints.forEach(p => {
+                const heightPercent = ((p - minPrice) / range) * 100;
+                sparklineHTML += `<div class="spark-bar" style="height: ${Math.max(10, heightPercent)}%"></div>`;
+            });
+        }
+        sparklineHTML += '</div>';
 
         const div = document.createElement('div');
         div.className = 'stock-item';
@@ -141,6 +161,7 @@ function renderStocks() {
                 </div>
                 <span class="item-cost ${priceClass}">$${formatMoney(stock.price)} ${arrow}</span>
             </div>
+            ${sparklineHTML}
             <div class="stock-actions">
                 <button class="btn-buy" ${state.money < stock.price ? 'disabled' : ''} onclick="buyStock('${key}')">Buy</button>
                 <button class="btn-sell" ${stock.owned <= 0 ? 'disabled' : ''} onclick="sellStock('${key}')">Sell</button>
@@ -160,10 +181,12 @@ function renderRewards() {
         div.style.opacity = reward.unlocked ? '1' : '0.5';
         div.innerHTML = `
             <div class="item-info">
-                <span class="item-name">${reward.name}</span>
+                <span class="item-name"><i class="fa-solid ${reward.icon}"></i> ${reward.name}</span>
                 <span class="item-desc">${reward.desc}</span>
             </div>
-            <span style="color: ${reward.unlocked ? '#4caf50' : '#f44336'}">${reward.unlocked ? 'Unlocked' : 'Locked'}</span>
+            <span style="color: ${reward.unlocked ? 'var(--primary)' : 'var(--danger)'}; font-weight: bold;">
+                ${reward.unlocked ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-solid fa-lock"></i>'}
+            </span>
         `;
         rewardsList.appendChild(div);
     }
