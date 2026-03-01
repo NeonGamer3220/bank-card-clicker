@@ -85,11 +85,6 @@ const state = {
     }
 };
 
-// Supabase Config
-const SUPABASE_URL = 'https://szmerwsuwbaljeedrlxi.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN6bWVyd3N1d2JhbGplZWRybHhpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzNzU0MTEsImV4cCI6MjA4Nzk1MTQxMX0.YjUs1aWwsIBETh57zk8G5_Z9wEPlsyV0chiGUmLqLgw';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
 // DOM Elements
 const moneyEl = document.getElementById('money');
 const mpcEl = document.getElementById('money-per-click');
@@ -633,41 +628,29 @@ setInterval(() => {
 }, Math.floor(Math.random() * 60000) + 120000);
 
 // Save and Load
-async function saveGame() {
+function saveGame() {
     state.lastSaved = Date.now();
     localStorage.setItem('bankCardClickerSave', JSON.stringify(state));
-    try {
-        await supabase.rpc('save_player', {
-            p_player_name: state.playerName,
-            p_money: state.money,
-            p_money_per_click: state.moneyPerClick,
-            p_money_per_second: state.moneyPerSecond,
-            p_current_title: state.title,
-            p_upgrades: JSON.stringify(state.upgrades),
-            p_companies: JSON.stringify(state.companies),
-            p_houses: JSON.stringify(state.realEstate),
-            p_shop: JSON.stringify(state.shop),
-            p_stocks: JSON.stringify(state.stocks)
-        });
-    } catch(e) {}
 }
 
-async function loadGame() {
+function loadGame() {
     const saved = localStorage.getItem('bankCardClickerSave');
     if (saved) {
         const parsed = JSON.parse(saved);
         Object.assign(state, parsed);
         
+        // Calculate offline earnings
         if (state.lastSaved) {
             const now = Date.now();
             const diffSeconds = Math.floor((now - state.lastSaved) / 1000);
             if (diffSeconds > 0 && state.moneyPerSecond > 0) {
                 const offlineEarnings = diffSeconds * state.moneyPerSecond;
                 state.money += offlineEarnings;
-                alert(`Welcome back! You earned ${formatMoney(offlineEarnings)} while you were offline.`);
+                alert(`Welcome back! You earned $${formatMoney(offlineEarnings)} while you were offline.`);
             }
         }
     } else {
+        // First time playing - ask for name
         setTimeout(() => {
             const name = prompt("Welcome! Please enter your name for the leaderboard:");
             if(name && name.trim() !== "") {
@@ -678,24 +661,6 @@ async function loadGame() {
             updateUI();
         }, 500);
     }
-    
-    // Try to load from Supabase
-    try {
-        const { data } = await supabase.rpc('get_player', { p_player_name: state.playerName });
-        if (data && data.length > 0) {
-            const p = data[0];
-            state.money = p.money;
-            state.moneyPerClick = p.money_per_click;
-            state.moneyPerSecond = p.money_per_second;
-            state.title = p.current_title;
-            state.upgrades = JSON.parse(p.upgrades);
-            state.companies = JSON.parse(p.companies);
-            state.realEstate = JSON.parse(p.houses);
-            state.shop = JSON.parse(p.shop);
-            state.stocks = JSON.parse(p.stocks);
-            localStorage.setItem('bankCardClickerSave', JSON.stringify(state));
-        }
-    } catch(e) {}
 }
 
 // Initial Render
