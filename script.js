@@ -126,7 +126,10 @@ function updateUI() {
                 alert("Upgrades maxed!");
             } else if (action == '3') {
                 if(confirm("Are you sure you want to reset ALL progress?")) {
-                    localStorage.clear();
+                    // Clear all local storage
+                    localStorage.removeItem('bankCardClickerSave');
+                    localStorage.removeItem('bankClickerLeaderboard');
+                    // Reset state
                     location.reload();
                 }
             }
