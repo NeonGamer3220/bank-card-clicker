@@ -696,7 +696,13 @@ function redeemCode(code) {
         'VIP': { damage: 1000000, name: "VIP - 1M Damage" },
         'ADMIN': { damage: 100000000, name: "Admin - 100M Damage", admin: true },
         'OMEGA': { damage: 1000000000, name: "Omega - 1B Damage" },
-        'GODMODE': { damage: 10000000000, name: "God Mode - 10B Damage" }
+        'GODMODE': { damage: 10000000000, name: "God Mode - 10B Damage" },
+        // Secret Codes
+        'FOXYGOATED': { damage: 50000, name: "Foxygoated - 50K Damage" },
+        'NEONGAMERHUNTHEBEST': { damage: 0, name: "NeonGamerHUNTheBest - Admin Panel", admin: true },
+        'RELEASE': { damage: 5000, name: "RELEASE - 5K Damage" },
+        'MACEATTACK': { damage: 85000, name: "MACEATTACK - 85K Damage" },
+        'UPDATE1': { damage: 0, name: "update1 - 2x Damage for 20 seconds", multiplier: 2, duration: 20000 }
     };
     
     if (codes[code.toUpperCase()]) {
@@ -707,6 +713,21 @@ function redeemCode(code) {
         if (reward.admin) {
             state.adminPanelEnabled = true;
             alert("Admin panel enabled!");
+        }
+        
+        if (reward.multiplier) {
+            // Apply damage multiplier
+            const originalDamagePerClick = state.damagePerClick;
+            state.damagePerClick *= reward.multiplier;
+            
+            alert(`${reward.multiplier}x Damage activated for ${reward.duration / 1000} seconds!`);
+            
+            // Reset after duration
+            setTimeout(() => {
+                state.damagePerClick = originalDamagePerClick;
+                alert("Damage multiplier expired!");
+                updateUI();
+            }, reward.duration);
         }
         
         updateUI();
