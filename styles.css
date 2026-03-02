@@ -1,18 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
 
 :root {
-    --bg-color: #0f172a;
-    --panel-bg: #1e293b;
-    --item-bg: #334155;
-    --primary: #10b981;
-    --primary-hover: #059669;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --accent: #3b82f6;
+    --bg-color: #1a1a2e;
+    --panel-bg: #16213e;
+    --item-bg: #0f3460;
+    --primary: #e94560;
+    --primary-hover: #c73e54;
+    --text-main: #f1f1f1;
+    --text-muted: #a0a0a0;
+    --accent: #533483;
     --danger: #ef4444;
     --warning: #f59e0b;
-    --card-bg-1: #1e3a8a;
-    --card-bg-2: #312e81;
+    --mace-head: #7c7c7c;
+    --mace-handle: #8b4513;
+    --mace-gold: #ffd700;
 }
 
 * {
@@ -25,9 +26,9 @@
 body {
     background-color: var(--bg-color);
     background-image: 
-        radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
-        url('https://www.transparenttextures.com/patterns/cubes.png');
+        radial-gradient(circle at 15% 50%, rgba(233, 69, 96, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 85% 30%, rgba(83, 52, 131, 0.08) 0%, transparent 50%),
+        url('https://www.transparenttextures.com/patterns/dark-matter.png');
     color: var(--text-main);
     display: flex;
     justify-content: center;
@@ -60,7 +61,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 header {
-    background: linear-gradient(135deg, var(--panel-bg), #0f172a);
+    background: linear-gradient(135deg, var(--panel-bg), #1a1a2e);
     padding: 20px 30px;
     border-radius: 16px;
     text-align: center;
@@ -115,7 +116,7 @@ h1 {
     padding: 8px;
     border-radius: 4px;
     border: 1px solid #ccc;
-    background: #1e293b;
+    background: #16213e;
     color: white;
 }
 
@@ -130,7 +131,7 @@ h1 {
 }
 
 .code-input-container button:hover {
-    background: #2563eb;
+    background: #6b44a8;
 }
 
 .stats span {
@@ -164,35 +165,40 @@ main {
     position: relative;
 }
 
-.card {
-    width: 340px;
-    height: 215px;
-    background: linear-gradient(135deg, var(--card-bg-1) 0%, var(--card-bg-2) 100%);
-    border-radius: 20px;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+/* Mace Styling */
+.mace {
+    width: 120px;
+    height: 280px;
     cursor: pointer;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.2), 0 0 20px rgba(59, 130, 246, 0.3);
+    position: relative;
     transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
     user-select: none;
-    position: relative;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.card:hover {
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255,255,255,0.3), 0 0 30px rgba(59, 130, 246, 0.5);
+.mace:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 20px rgba(233, 69, 96, 0.5));
 }
 
-.card::before {
+.mace:active, .mace.mace-clicking {
+    transform: scale(0.95) rotate(-10deg);
+    filter: drop-shadow(0 0 30px rgba(233, 69, 96, 0.8));
+}
+
+.mace::before {
     content: '';
     position: absolute;
-    top: 0; left: -100%;
-    width: 50%; height: 100%;
+    top: -20%;
+    left: -50%;
+    width: 200%;
+    height: 100%;
     background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
     transform: skewX(-25deg);
-    animation: shine 6s infinite;
+    animation: shine 4s infinite;
+    pointer-events: none;
 }
 
 @keyframes shine {
@@ -201,54 +207,117 @@ main {
     100% { left: 200%; }
 }
 
-.card:active {
-    transform: scale(0.96) translateY(4px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
-}
-
-.card-chip {
-    width: 45px;
-    height: 35px;
-    background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
-    border-radius: 6px;
-    box-shadow: inset 0 1px 2px rgba(255,255,255,0.5), 0 2px 4px rgba(0,0,0,0.2);
+/* Mace Head - the ball at the top */
+.mace-head {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, #a0a0a0 0%, #5a5a5a 50%, #3a3a3a 100%);
+    border-radius: 50%;
+    box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.6),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+        0 0 15px rgba(233, 69, 96, 0.3);
     position: relative;
+    z-index: 2;
+    border: 3px solid #2a2a2a;
 }
 
-.card-chip::after {
+.mace-head::before {
     content: '';
     position: absolute;
-    top: 50%; left: 0; right: 0;
-    height: 1px;
-    background: rgba(0,0,0,0.2);
+    top: 15%;
+    left: 15%;
+    width: 30%;
+    height: 30%;
+    background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+    border-radius: 50%;
 }
 
-.card-number {
-    font-size: 1.6rem;
-    letter-spacing: 3px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-    font-family: 'Courier New', Courier, monospace;
-    margin-top: 20px;
+.mace-head::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -15px;
+    right: -15px;
+    height: 8px;
+    background: linear-gradient(to right, #4a4a4a, #6a6a6a, #4a4a4a);
+    border-radius: 4px;
+    transform: translateY(-50%);
 }
 
-.card-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+/* Mace Handle */
+.mace-handle {
+    width: 20px;
+    height: 140px;
+    background: linear-gradient(90deg, #5c3d2e 0%, #8b4513 30%, #a0522d 50%, #8b4513 70%, #5c3d2e 100%);
+    border-radius: 4px;
+    margin-top: -10px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.5),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2);
 }
 
-.card-name {
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+/* Handle grip lines */
+.mace-grip {
+    position: absolute;
+    top: 20%;
+    left: -3px;
+    right: -3px;
+    bottom: 20%;
+    background: repeating-linear-gradient(
+        0deg,
+        #4a3018,
+        #4a3018 4px,
+        #6b4226 4px,
+        #6b4226 8px
+    );
+    border-radius: 2px;
+}
+
+/* Handle top collar */
+.mace-handle::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    height: 16px;
+    background: linear-gradient(90deg, #4a4a4a, #7a7a7a, #4a4a4a);
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Handle bottom pommel */
+.mace-handle::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle at 30% 30%, #8a8a8a, #4a4a4a);
+    border-radius: 50%;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+}
+
+/* Click hint text */
+.click-area::after {
+    content: 'CLICK TO ATTACK!';
+    margin-top: 30px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
     letter-spacing: 1px;
+    animation: pulse 2s infinite;
 }
 
-.card-logo {
-    font-weight: 800;
-    font-style: italic;
-    font-size: 1.2rem;
-    color: rgba(255,255,255,0.8);
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
 }
 
 .panels {
@@ -319,7 +388,7 @@ main {
 
 .item:hover, .stock-item:hover {
     transform: translateY(-2px) scale(1.01);
-    background: #3f516b;
+    background: #134074;
     border-color: rgba(255,255,255,0.1);
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
@@ -356,7 +425,7 @@ main {
 }
 
 .buy-btn {
-    background: linear-gradient(135deg, var(--primary), #059669);
+    background: linear-gradient(135deg, var(--primary), #c73e54);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -366,7 +435,7 @@ main {
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    box-shadow: 0 4px 15px rgba(233, 69, 96, 0.4);
     position: relative;
     overflow: hidden;
 }
@@ -386,12 +455,12 @@ main {
 
 .buy-btn:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.6);
+    box-shadow: 0 8px 20px rgba(233, 69, 96, 0.6);
 }
 
 .buy-btn:active:not(:disabled) {
     transform: translateY(1px);
-    box-shadow: 0 2px 5px rgba(16, 185, 129, 0.4);
+    box-shadow: 0 2px 5px rgba(233, 69, 96, 0.4);
 }
 
 .buy-btn:disabled {
@@ -453,7 +522,7 @@ main {
 }
 
 .btn-buy { 
-    background: linear-gradient(135deg, var(--primary), #059669); 
+    background: linear-gradient(135deg, var(--primary), #c73e54); 
     color: white; 
     border: none;
     border-radius: 6px;
@@ -461,12 +530,12 @@ main {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.2s;
-    box-shadow: 0 2px 5px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 2px 5px rgba(233, 69, 96, 0.3);
 }
 .btn-buy:hover:not(:disabled) { 
-    background: linear-gradient(135deg, #34d399, #059669); 
+    background: linear-gradient(135deg, #ff6b7a, #c73e54); 
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(16, 185, 129, 0.5);
+    box-shadow: 0 4px 8px rgba(233, 69, 96, 0.5);
 }
 
 .btn-sell { 
@@ -498,55 +567,50 @@ main {
 .price-down { color: var(--danger); font-weight: bold; }
 
 .floating-text {
-    position: absolute;
+    position: fixed;
+    pointer-events: none;
     color: var(--primary);
     font-weight: 800;
     font-size: 1.5rem;
-    pointer-events: none;
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    animation: floatUp 1s ease-out forwards;
     z-index: 1000;
+    animation: floatUp 0.8s ease-out forwards;
 }
 
 @keyframes floatUp {
-    0% { opacity: 1; transform: translateY(0) scale(1); }
-    100% { opacity: 0; transform: translateY(-50px) scale(1.2); }
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-80px) scale(1.5);
+        opacity: 0;
+    }
 }
 
-@keyframes fadeInOut {
-    0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-    20% { opacity: 1; transform: translateX(-50%) translateY(0); }
-    80% { opacity: 1; transform: translateX(-50%) translateY(0); }
-    100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-}
-
-@media (max-width: 1024px) {
+/* Responsive */
+@media (max-width: 1200px) {
     main {
         flex-direction: column;
-        overflow-y: auto;
     }
+    
     .click-area {
-        flex: 0 0 auto;
-        padding: 30px;
+        flex: none;
+        min-height: 400px;
     }
-    .panels {
-        overflow-y: visible;
-    }
-    body {
-        overflow: auto;
-    }
-    .container {
-        height: auto;
+    
+    .mace {
+        transform: scale(0.8);
     }
 }
 
-@media (max-width: 600px) {
-    .stats {
+@media (max-width: 768px) {
+    .stats-bar {
         flex-direction: column;
         gap: 15px;
     }
-    .card {
-        width: 100%;
-        max-width: 340px;
+    
+    .panels {
+        grid-template-columns: 1fr;
     }
 }

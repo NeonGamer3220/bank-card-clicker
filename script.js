@@ -1,87 +1,87 @@
 const state = {
-    money: 0,
-    moneyPerClick: 1,
-    moneyPerSecond: 0,
-    title: "Broke",
+    damage: 0,
+    damagePerClick: 1,
+    dps: 0,
+    rank: "Novice",
     lastSaved: Date.now(),
     playerName: "Player",
     activeEvent: null,
     eventEndTime: 0,
     adminPanelEnabled: false,
     upgrades: {
-        betterPlastic: { level: 0, baseCost: 50, costMult: 1.5, effect: 1, name: "Better Plastic", desc: "+$1/click", icon: "fa-credit-card" },
-        goldChip: { level: 0, baseCost: 500, costMult: 1.8, effect: 10, name: "Gold Chip", desc: "+$10/click", icon: "fa-microchip" },
-        platinumCard: { level: 0, baseCost: 5000, costMult: 2, effect: 100, name: "Platinum Card", desc: "+$100/click", icon: "fa-gem" },
-        blackCard: { level: 0, baseCost: 100000, costMult: 2.5, effect: 2500, name: "Black Card", desc: "+$2,500/click", icon: "fa-crown" },
-        diamondCard: { level: 0, baseCost: 5000000, costMult: 3, effect: 50000, name: "Diamond Card", desc: "+$50,000/click", icon: "fa-gem" },
-        quantumCard: { level: 0, baseCost: 250000000, costMult: 3.5, effect: 1000000, name: "Quantum Card", desc: "+$1,000,000/click", icon: "fa-atom" }
+        sharpStone: { level: 0, baseCost: 50, costMult: 1.5, effect: 1, name: "Sharp Stone", desc: "+1 damage/click", icon: "fa-cubes-stacked" },
+        ironIngot: { level: 0, baseCost: 500, costMult: 1.8, effect: 10, name: "Iron Ingot", desc: "+10 damage/click", icon: "fa-cube" },
+        goldNugget: { level: 0, baseCost: 5000, costMult: 2, effect: 100, name: "Gold Nugget", desc: "+100 damage/click", icon: "fa-coins" },
+        netherite: { level: 0, baseCost: 100000, costMult: 2.5, effect: 2500, name: "Netherite Scrap", desc: "+2,500 damage/click", icon: "fa-fire" },
+        diamond: { level: 0, baseCost: 5000000, costMult: 3, effect: 50000, name: "Diamond", desc: "+50,000 damage/click", icon: "fa-gem" },
+        beacon: { level: 0, baseCost: 250000000, costMult: 3.5, effect: 1000000, name: "Beacon", desc: "+1,000,000 damage/click", icon: "fa-lightbulb" }
     },
     companies: {
-        lemonadeStand: { level: 0, baseCost: 100, costMult: 1.15, effect: 1, name: "Lemonade Stand", desc: "+$1/sec", icon: "fa-lemon" },
-        newspaperRoute: { level: 0, baseCost: 500, costMult: 1.18, effect: 5, name: "Newspaper Route", desc: "+$5/sec", icon: "fa-newspaper" },
-        onlineStore: { level: 0, baseCost: 2500, costMult: 1.2, effect: 30, name: "Online Store", desc: "+$30/sec", icon: "fa-store" },
-        carWash: { level: 0, baseCost: 10000, costMult: 1.22, effect: 150, name: "Car Wash", desc: "+$150/sec", icon: "fa-car-side" },
-        techStartup: { level: 0, baseCost: 50000, costMult: 1.25, effect: 800, name: "Tech Startup", desc: "+$800/sec", icon: "fa-laptop-code" },
-        cryptoMine: { level: 0, baseCost: 250000, costMult: 1.28, effect: 4500, name: "Crypto Mine", desc: "+$4,500/sec", icon: "fa-bitcoin" },
-        megaCorp: { level: 0, baseCost: 1500000, costMult: 1.3, effect: 30000, name: "Mega Corp", desc: "+$30,000/sec", icon: "fa-city" },
-        spaceAgency: { level: 0, baseCost: 10000000, costMult: 1.35, effect: 250000, name: "Space Agency", desc: "+$250,000/sec", icon: "fa-rocket" },
-        aiOverlord: { level: 0, baseCost: 100000000, costMult: 1.4, effect: 3000000, name: "AI Overlord", desc: "+$3,000,000/sec", icon: "fa-robot" }
+        zombie: { level: 0, baseCost: 100, costMult: 1.15, effect: 1, name: "Zombie", desc: "+1 DPS", icon: "fa-biohazard" },
+        skeleton: { level: 0, baseCost: 500, costMult: 1.18, effect: 5, name: "Skeleton", desc: "+5 DPS", icon: "fa-bone" },
+        spider: { level: 0, baseCost: 2500, costMult: 1.2, effect: 30, name: "Spider", desc: "+30 DPS", icon: "fa-spider" },
+        creeper: { level: 0, baseCost: 10000, costMult: 1.22, effect: 150, name: "Creeper", desc: "+150 DPS", icon: "fa-explosion" },
+        Enderman: { level: 0, baseCost: 50000, costMult: 1.25, effect: 800, name: "Enderman", desc: "+800 DPS", icon: "fa-ghost" },
+        Witch: { level: 0, baseCost: 250000, costMult: 1.28, effect: 4500, name: "Witch", desc: "+4,500 DPS", icon: "fa-hat-wizard" },
+        Piglin: { level: 0, baseCost: 1500000, costMult: 1.3, effect: 30000, name: "Piglin", desc: "+30,000 DPS", icon: "fa-piggy-bank" },
+        Warden: { level: 0, baseCost: 10000000, costMult: 1.35, effect: 250000, name: "Warden", desc: "+250,000 DPS", icon: "fa-wave-square" },
+        Dragon: { level: 0, baseCost: 100000000, costMult: 1.4, effect: 3000000, name: "Ender Dragon", desc: "+3,000,000 DPS", icon: "fa-dragon" }
     },
     realEstate: {
-        tent: { level: 0, baseCost: 1000, costMult: 1.15, effect: 10, name: "Tent", desc: "+$10/sec", icon: "fa-campground" },
-        tinyHome: { level: 0, baseCost: 5000, costMult: 1.18, effect: 75, name: "Tiny Home", desc: "+$75/sec", icon: "fa-house-medical" },
-        apartment: { level: 0, baseCost: 15000, costMult: 1.2, effect: 200, name: "Apartment", desc: "+$200/sec", icon: "fa-building" },
-        townhouse: { level: 0, baseCost: 50000, costMult: 1.22, effect: 800, name: "Townhouse", desc: "+$800/sec", icon: "fa-building-ngo" },
-        house: { level: 0, baseCost: 100000, costMult: 1.25, effect: 1500, name: "House", desc: "+$1,500/sec", icon: "fa-house" },
-        duplex: { level: 0, baseCost: 350000, costMult: 1.27, effect: 5000, name: "Duplex", desc: "+$5,000/sec", icon: "fa-building" },
-        mansion: { level: 0, baseCost: 2500000, costMult: 1.3, effect: 40000, name: "Mansion", desc: "+$40,000/sec", icon: "fa-house-chimney-window" },
-        penthouse: { level: 0, baseCost: 10000000, costMult: 1.32, effect: 150000, name: "Penthouse", desc: "+$150,000/sec", icon: "fa-hotel" },
-        skyscraper: { level: 0, baseCost: 50000000, costMult: 1.35, effect: 1000000, name: "Skyscraper", desc: "+$1,000,000/sec", icon: "fa-building-user" },
-        privateIsland: { level: 0, baseCost: 500000000, costMult: 1.4, effect: 15000000, name: "Private Island", desc: "+$15,000,000/sec", icon: "fa-umbrella-beach" },
-        moonBase: { level: 0, baseCost: 10000000000, costMult: 1.5, effect: 500000000, name: "Moon Base", desc: "+$500,000,000/sec", icon: "fa-moon" },
-        marsColony: { level: 0, baseCost: 100000000000, costMult: 1.6, effect: 5000000000, name: "Mars Colony", desc: "+$5B/sec", icon: "fa-mars" }
+        plains: { level: 0, baseCost: 1000, costMult: 1.15, effect: 10, name: "Plains", desc: "+10 DPS", icon: "fa-seedling" },
+        forest: { level: 0, baseCost: 5000, costMult: 1.18, effect: 75, name: "Forest", desc: "+75 DPS", icon: "fa-tree" },
+        desert: { level: 0, baseCost: 15000, costMult: 1.2, effect: 200, name: "Desert", desc: "+200 DPS", icon: "fa-sun" },
+        taiga: { level: 0, baseCost: 50000, costMult: 1.22, effect: 800, name: "Taiga", desc: "+800 DPS", icon: "fa-snowflake" },
+        jungle: { level: 0, baseCost: 100000, costMult: 1.25, effect: 1500, name: "Jungle", desc: "+1,500 DPS", icon: "fa-leaf" },
+        swamp: { level: 0, baseCost: 350000, costMult: 1.27, effect: 5000, name: "Swamp", desc: "+5,000 DPS", icon: "fa-droplet" },
+        mountains: { level: 0, baseCost: 2500000, costMult: 1.3, effect: 40000, name: "Mountains", desc: "+40,000 DPS", icon: "fa-mountain" },
+        mushroomIsland: { level: 0, baseCost: 10000000, costMult: 1.32, effect: 150000, name: "Mushroom Island", desc: "+150,000 DPS", icon: "fa-mushroom" },
+        nether: { level: 0, baseCost: 50000000, costMult: 1.35, effect: 1000000, name: "The Nether", desc: "+1,000,000 DPS", icon: "fa-fire-burner" },
+        end: { level: 0, baseCost: 500000000, costMult: 1.4, effect: 15000000, name: "The End", desc: "+15,000,000 DPS", icon: "fa-moon" },
+        outerEnd: { level: 0, baseCost: 10000000000, costMult: 1.5, effect: 500000000, name: "Outer End", desc: "+500,000,000 DPS", icon: "fa-stars" },
+        void: { level: 0, baseCost: 100000000000, costMult: 1.6, effect: 5000000000, name: "The Void", desc: "+5B DPS", icon: "fa-infinity" }
     },
     shop: {
-        usedCar: { owned: false, cost: 10000, name: "Used Car", desc: "A rusty old car.", icon: "fa-car-side" },
-        newCar: { owned: false, cost: 50000, name: "New Car", desc: "Reliable transportation.", icon: "fa-car" },
-        sportsCar: { owned: false, cost: 250000, name: "Sports Car", desc: "Vroom vroom!", icon: "fa-car-burst" },
-        superCar: { owned: false, cost: 1500000, name: "Super Car", desc: "0 to 60 in 2 seconds.", icon: "fa-gauge-high" },
-        hyperCar: { owned: false, cost: 10000000, name: "Hyper Car", desc: "Faster than sound.", icon: "fa-rocket" },
-        boat: { owned: false, cost: 2500000, name: "Speed Boat", desc: "Zoom across water.", icon: "fa-water" },
-        yacht: { owned: false, cost: 50000000, name: "Yacht", desc: "Sail the seas.", icon: "fa-ship" },
-        cruiseShip: { owned: false, cost: 200000000, name: "Cruise Ship", desc: "A floating city.", icon: "fa-anchor" },
-        privateJet: { owned: false, cost: 50000000, name: "Private Jet", desc: "Fly anywhere.", icon: "fa-plane" },
-        privateIsland: { owned: false, cost: 500000000, name: "Private Island", desc: "Your own paradise.", icon: "fa-umbrella-beach" },
-        sportsTeam: { owned: false, cost: 2000000000, name: "Sports Team", desc: "Own a franchise.", icon: "fa-basketball" },
-        restaurantChain: { owned: false, cost: 5000000000, name: "Restaurant Chain", desc: "Feed the world.", icon: "fa-utensils" },
-        techCompany: { owned: false, cost: 25000000000, name: "Tech Company", desc: "Innovation empire.", icon: "fa-laptop" },
-        smallCountry: { owned: false, cost: 50000000000, name: "Small Country", desc: "Rule your own nation.", icon: "fa-flag" },
-        planet: { owned: false, cost: 1000000000000, name: "Alien Planet", desc: "Own a whole planet!", icon: "fa-globe" }
+        woodenSword: { owned: false, cost: 10000, name: "Wooden Sword", desc: "Basic weapon.", icon: "fa-khanda" },
+        stoneSword: { owned: false, cost: 50000, name: "Stone Sword", desc: "Sturdy option.", icon: "fa-khanda" },
+        ironSword: { owned: false, cost: 250000, name: "Iron Sword", desc: "Reliable weapon.", icon: "fa-khanda" },
+        goldSword: { owned: false, cost: 1500000, name: "Gold Sword", desc: "Shiny but weak.", icon: "fa-khanda" },
+        diamondSword: { owned: false, cost: 10000000, name: "Diamond Sword", desc: "Legendary blade.", icon: "fa-gem" },
+        netheriteSword: { owned: false, cost: 2500000, name: "Netherite Sword", desc: "The ultimate blade.", icon: "fa-fire" },
+        bow: { owned: false, cost: 50000000, name: "Bow", desc: "Range attack.", icon: "fa-bullseye" },
+        crossbow: { owned: false, cost: 200000000, name: "Crossbow", desc: "Powerful ranged.", icon: "fa-crosshairs" },
+        trident: { owned: false, cost: 50000000, name: "Trident", desc: "Weapon of the ocean.", icon: "fa-anchor" },
+        elytra: { owned: false, cost: 500000000, name: "Elytra", desc: "Fly through the skies.", icon: "fa-paper-plane" },
+        horse: { owned: false, cost: 2000000000, name: "Horse", desc: "Ride into battle.", icon: "fa-horse" },
+        wolf: { owned: false, cost: 5000000000, name: "Tamed Wolf", desc: "Loyal companion.", icon: "fa-dog" },
+        ironGolem: { owned: false, cost: 25000000000, name: "Iron Golem", desc: "Your own protector.", icon: "fa-robot" },
+        shulkerBox: { owned: false, cost: 50000000000, name: "Shulker Box", desc: "Portable storage.", icon: "fa-box" },
+        elytraWings: { owned: false, cost: 1000000000000, name: "Elytra Wings", desc: "Phantom wings!", icon: "fa-feather-pointed" }
     },
     stocks: {
-        tech: { price: 100, owned: 0, name: "Tech Co.", history: [] },
-        food: { price: 50, owned: 0, name: "Food Inc.", history: [] },
-        energy: { price: 200, owned: 0, name: "Energy Corp.", history: [] },
-        crypto: { price: 500, owned: 0, name: "KiloCoin", history: [] },
-        space: { price: 1000, owned: 0, name: "AstroX", history: [] },
-        ai: { price: 2500, owned: 0, name: "AI Corp", history: [] },
-        biotech: { price: 3000, owned: 0, name: "BioTech", history: [] },
-        defense: { price: 4000, owned: 0, name: "Defense Co.", history: [] },
-        entertainment: { price: 150, owned: 0, name: "Movie Studio", history: [] },
-        fashion: { price: 80, owned: 0, name: "Fashion Brand", history: [] }
+        efficiency: { price: 100, owned: 0, name: "Efficiency Book", history: [] },
+        unbreaking: { price: 50, owned: 0, name: "Unbreaking Book", history: [] },
+        mending: { price: 200, owned: 0, name: "Mending Book", history: [] },
+        sharpness: { price: 500, owned: 0, name: "Sharpness Book", history: [] },
+        power: { price: 1000, owned: 0, name: "Power Book", history: [] },
+        protection: { price: 2500, owned: 0, name: "Protection Book", history: [] },
+        fortune: { price: 3000, owned: 0, name: "Fortune Book", history: [] },
+        looting: { price: 4000, owned: 0, name: "Looting Book", history: [] },
+        silkTouch: { price: 150, owned: 0, name: "Silk Touch Book", history: [] },
+        infinity: { price: 80, owned: 0, name: "Infinity Book", history: [] }
     },
     rewards: {
-        first10: { unlocked: false, req: 10, name: "Beginner", desc: "Reach $10", icon: "fa-seedling" },
-        first100: { unlocked: false, req: 100, name: "Hundred Club", desc: "Reach $100", icon: "fa-coins" },
-        firstThousand: { unlocked: false, req: 1000, name: "Thousandaire", desc: "Reach $1,000", icon: "fa-money-bill-wave" },
-        first10k: { unlocked: false, req: 10000, name: "Ten Thousand", desc: "Reach $10,000", icon: "fa-sack-dollar" },
-        first100k: { unlocked: false, req: 100000, name: "Hundred Thousand", desc: "Reach $100,000", icon: "fa-vault" },
-        firstMillion: { unlocked: false, req: 1000000, name: "Millionaire", desc: "Reach $1M", icon: "fa-crown" },
-        first10M: { unlocked: false, req: 10000000, name: "Multi-Millionaire", desc: "Reach $10M", icon: "fa-gem" },
-        first100M: { unlocked: false, req: 100000000, name: "Centimillionaire", desc: "Reach $100M", icon: "fa-star" },
-        firstBillion: { unlocked: false, req: 1000000000, name: "Billionaire", desc: "Reach $1B", icon: "fa-rocket" },
-        first10B: { unlocked: false, req: 10000000000, name: "Ten Billionaire", desc: "Reach $10B", icon: "fa-globe" },
-        firstTrillion: { unlocked: false, req: 1000000000000, name: "Trillionaire", desc: "Reach $1T", icon: "fa-universe" }
+        first10: { unlocked: false, req: 10, name: "First Swing", desc: "Deal 10 damage", icon: "fa-hand-fist" },
+        first100: { unlocked: false, req: 100, name: "Mob Hunter", desc: "Deal 100 damage", icon: "fa-skull" },
+        firstThousand: { unlocked: false, req: 1000, name: "Adventurer", desc: "Deal 1,000 damage", icon: "fa-compass" },
+        first10k: { unlocked: false, req: 10000, name: "Warrior", desc: "Deal 10,000 damage", icon: "fa-shield-halved" },
+        first100k: { unlocked: false, req: 100000, name: "Knight", desc: "Deal 100,000 damage", icon: "fa-chess-knight" },
+        firstMillion: { unlocked: false, req: 1000000, name: "Hero", desc: "Deal 1M damage", icon: "fa-medal" },
+        first10M: { unlocked: false, req: 10000000, name: "Champion", desc: "Deal 10M damage", icon: "fa-trophy" },
+        first100M: { unlocked: false, req: 100000000, name: "Legend", desc: "Deal 100M damage", icon: "fa-crown" },
+        firstBillion: { unlocked: false, req: 1000000000, name: "Godslayer", desc: "Deal 1B damage", icon: "fa-dragon" },
+        first10B: { unlocked: false, req: 10000000000, name: "Universal", desc: "Deal 10B damage", icon: "fa-globe" },
+        firstTrillion: { unlocked: false, req: 1000000000000, name: "Omnipotent", desc: "Deal 1T damage", icon: "fa-universe" }
     }
 };
 
@@ -103,11 +103,11 @@ if (document.readyState === 'loading') {
 }
 
 // DOM Elements
-const moneyEl = document.getElementById('money');
-const mpcEl = document.getElementById('money-per-click');
-const mpsEl = document.getElementById('money-per-second');
+const damageEl = document.getElementById('damage');
+const dpcEl = document.getElementById('damage-per-click');
+const dpsEl = document.getElementById('damage-per-second');
 const titleEl = document.getElementById('current-title');
-const bankCard = document.getElementById('bank-card');
+const maceEl = document.getElementById('mace');
 
 const upgradesList = document.getElementById('upgrades-list');
 const companiesList = document.getElementById('companies-list');
@@ -118,7 +118,7 @@ const rewardsList = document.getElementById('rewards-list');
 const leaderboardList = document.getElementById('leaderboard-list');
 
 // Format numbers
-function formatMoney(num) {
+function formatDamage(num) {
     if (num >= 1000000000) return (num / 1000000000).toFixed(1) + 'B';
     if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
     if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
@@ -128,10 +128,10 @@ function formatMoney(num) {
 // Update UI
 function updateUI() {
     checkTitles();
-    moneyEl.innerText = formatMoney(state.money);
-    mpcEl.innerText = formatMoney(state.moneyPerClick);
-    mpsEl.innerText = formatMoney(state.moneyPerSecond);
-    titleEl.innerText = state.title;
+    damageEl.innerText = formatDamage(state.damage);
+    dpcEl.innerText = formatDamage(state.damagePerClick);
+    dpsEl.innerText = formatDamage(state.dps);
+    titleEl.innerText = state.rank;
 
     // Render Admin Button if enabled
     const statsBar = document.querySelector('.stats-bar');
@@ -151,24 +151,24 @@ function updateUI() {
         adminBtn.style.fontWeight = 'bold';
         
         adminBtn.onclick = () => {
-            const action = prompt("Admin Panel Options:\n1. Add Money\n2. Max All Upgrades\n3. Reset Game\n4. Admin Abuse Panel\n\nEnter 1, 2, 3, or 4:");
+            const action = prompt("Admin Panel Options:\n1. Add Damage\n2. Max All Upgrades\n3. Reset Game\n4. Admin Abuse Panel\n\nEnter 1, 2, 3, or 4:");
              if (action == '1') {
                  const amount = prompt("Enter amount to add:");
                  if(amount && !isNaN(amount)) {
-                     state.money += parseInt(amount);
+                     state.damage += parseInt(amount);
                      updateUI();
                  }
              } else if (action == '4') {
                 // Admin Abuse Panel
-                const abuseAction = prompt("ADMIN ABUSE PANEL:\n1. Start 5x Cash Event\n2. Start 10x Cash Event\n3. Crash Economy (Set money to 0)\n4. Gift Everyone (Give all players 1M)\n\nEnter 1, 2, 3, or 4:");
+                const abuseAction = prompt("ADMIN ABUSE PANEL:\n1. Start 5x Damage Event\n2. Start 10x Damage Event\n3. Reset Progress (Set damage to 0)\n4. Gift Everyone (Give all players 1M)\n\nEnter 1, 2, 3, or 4:");
                 
                 if (abuseAction == '1') {
-                    triggerGlobalEvent("5x CASH!!!", "money", 5);
+                    triggerGlobalEvent("5x DAMAGE!!!", "damage", 5);
                 } else if (abuseAction == '2') {
-                    triggerGlobalEvent("10x CASH!!!", "money", 10);
+                    triggerGlobalEvent("10x DAMAGE!!!", "damage", 10);
                 } else if (abuseAction == '3') {
-                    state.money = 0;
-                    alert("Economy crashed! Money set to 0.");
+                    state.damage = 0;
+                    alert("Progress reset! Damage set to 0.");
                 } else if (abuseAction == '4') {
                     alert("Gifted everyone 1M!");
                     // This would require a server to actually work
@@ -192,9 +192,9 @@ function updateUI() {
                 // Clear all local storage
                 localStorage.clear();
                 // Reset state manually without reloading immediately
-                state.money = 0;
-                state.moneyPerClick = 1;
-                state.moneyPerSecond = 0;
+                state.damage = 0;
+                state.damagePerClick = 1;
+                state.dps = 0;
                 state.activeEvent = null;
                 state.eventEndTime = 0;
                 state.adminPanelEnabled = false;
@@ -206,8 +206,8 @@ function updateUI() {
                 for (const key in state.shop) state.shop[key].owned = false;
                 
                 // Clear save and leaderboard
-                localStorage.removeItem('bankCardClickerSave');
-                localStorage.removeItem('bankClickerLeaderboard');
+                localStorage.removeItem('maceClickerSave');
+                localStorage.removeItem('maceClickerLeaderboard');
                 
                 recalculateStats();
                 updateUI();
@@ -245,9 +245,9 @@ function renderList(items, container, buyFunction) {
             <div class="item-info">
                 <span class="item-name"><i class="fa-solid ${item.icon}"></i> ${item.name} (Lvl ${item.level})</span>
                 <span class="item-desc">${item.desc}</span>
-                <span class="item-cost">$${formatMoney(cost)}</span>
+                <span class="item-cost">⚔️ ${formatDamage(cost)}</span>
             </div>
-            <button class="buy-btn" ${state.money < cost ? 'disabled' : ''} onclick="${buyFunction.name}('${key}')">Buy</button>
+            <button class="buy-btn" ${state.damage < cost ? 'disabled' : ''} onclick="${buyFunction.name}('${key}')">Buy</button>
         `;
         container.appendChild(div);
     }
@@ -264,9 +264,9 @@ function renderShop() {
             <div class="item-info">
                 <span class="item-name"><i class="fa-solid ${item.icon}"></i> ${item.name}</span>
                 <span class="item-desc">${item.desc}</span>
-                <span class="item-cost">${item.owned ? 'Owned' : '$' + formatMoney(item.cost)}</span>
+                <span class="item-cost">${item.owned ? 'Owned' : '⚔️ ' + formatDamage(item.cost)}</span>
             </div>
-            <button class="buy-btn" ${state.money < item.cost || item.owned ? 'disabled' : ''} onclick="buyShopItem('${key}')">
+            <button class="buy-btn" ${state.damage < item.cost || item.owned ? 'disabled' : ''} onclick="buyShopItem('${key}')">
                 ${item.owned ? 'Owned' : 'Buy'}
             </button>
         `;
@@ -311,11 +311,11 @@ function renderStocks() {
                     <span class="item-name">${stock.name}</span>
                     <span class="item-desc">Owned: ${stock.owned}</span>
                 </div>
-                <span class="item-cost ${priceClass}">$${formatMoney(stock.price)} ${arrow}</span>
+                <span class="item-cost ${priceClass}">⚔️ ${formatDamage(stock.price)} ${arrow}</span>
             </div>
             ${sparklineHTML}
             <div class="stock-actions">
-                <button class="btn-buy" ${state.money < stock.price ? 'disabled' : ''} onclick="buyStock('${key}')">Buy</button>
+                <button class="btn-buy" ${state.damage < stock.price ? 'disabled' : ''} onclick="buyStock('${key}')">Buy</button>
                 <button class="btn-sell" ${stock.owned <= 0 ? 'disabled' : ''} onclick="sellStock('${key}')">Sell</button>
             </div>
         `;
@@ -356,7 +356,7 @@ function renderLeaderboard() {
                 <span class="item-name"><i class="fa-solid fa-user"></i> #${index + 1} ${player.name}</span>
                 <span class="item-desc">${player.name === state.playerName ? 'You' : ''}</span>
             </div>
-            <span style="color: var(--primary); font-weight: bold;">$${formatMoney(player.money)}</span>
+            <span style="color: var(--primary); font-weight: bold;">⚔️ ${formatDamage(player.damage)}</span>
         `;
         leaderboardList.appendChild(div);
     });
@@ -369,8 +369,8 @@ function buyUpgrade(key) {
     const item = state.upgrades[key];
     if (item.level >= MAX_LEVEL) return;
     const cost = getCost(item.baseCost, item.costMult, item.level);
-    if (state.money >= cost) {
-        state.money -= cost;
+    if (state.damage >= cost) {
+        state.damage -= cost;
         item.level++;
         recalculateStats();
         updateUI();
@@ -381,8 +381,8 @@ function buyCompany(key) {
     const item = state.companies[key];
     if (item.level >= MAX_LEVEL) return;
     const cost = getCost(item.baseCost, item.costMult, item.level);
-    if (state.money >= cost) {
-        state.money -= cost;
+    if (state.damage >= cost) {
+        state.damage -= cost;
         item.level++;
         recalculateStats();
         updateUI();
@@ -393,8 +393,8 @@ function buyRealEstate(key) {
     const item = state.realEstate[key];
     if (item.level >= MAX_LEVEL) return;
     const cost = getCost(item.baseCost, item.costMult, item.level);
-    if (state.money >= cost) {
-        state.money -= cost;
+    if (state.damage >= cost) {
+        state.damage -= cost;
         item.level++;
         recalculateStats();
         updateUI();
@@ -403,8 +403,8 @@ function buyRealEstate(key) {
 
 function buyShopItem(key) {
     const item = state.shop[key];
-    if (state.money >= item.cost && !item.owned) {
-        state.money -= item.cost;
+    if (state.damage >= item.cost && !item.owned) {
+        state.damage -= item.cost;
         item.owned = true;
         updateUI();
     }
@@ -412,8 +412,8 @@ function buyShopItem(key) {
 
 function buyStock(key) {
     const stock = state.stocks[key];
-    if (state.money >= stock.price) {
-        state.money -= stock.price;
+    if (state.damage >= stock.price) {
+        state.damage -= stock.price;
         stock.owned++;
         updateUI();
     }
@@ -422,7 +422,7 @@ function buyStock(key) {
 function sellStock(key) {
     const stock = state.stocks[key];
     if (stock.owned > 0) {
-        state.money += stock.price;
+        state.damage += stock.price;
         stock.owned--;
         updateUI();
     }
@@ -430,41 +430,42 @@ function sellStock(key) {
 
 // Recalculate Stats
 function recalculateStats() {
-    // Money per click
-    let mpc = 1;
+    // Damage per click
+    let dpc = 1;
     for (const key in state.upgrades) {
-        mpc += state.upgrades[key].level * state.upgrades[key].effect;
+        dpc += state.upgrades[key].level * state.upgrades[key].effect;
     }
-    state.moneyPerClick = mpc;
+    state.damagePerClick = dpc;
 
-    // Money per second
-    let mps = 0;
+    // DPS (damage per second)
+    let dps = 0;
     for (const key in state.companies) {
-        mps += state.companies[key].level * state.companies[key].effect;
+        dps += state.companies[key].level * state.companies[key].effect;
     }
     for (const key in state.realEstate) {
-        mps += state.realEstate[key].level * state.realEstate[key].effect;
+        dps += state.realEstate[key].level * state.realEstate[key].effect;
     }
-    state.moneyPerSecond = mps;
+    state.dps = dps;
 }
 
 // Check Titles and Rewards
 function checkTitles() {
-    // Titles
-    if (state.money >= 1000000000000) state.title = "Trillionaire";
-    else if (state.money >= 1000000000) state.title = "Billionaire";
-    else if (state.money >= 100000000) state.title = "Centimillionaire";
-    else if (state.money >= 10000000) state.title = "Decamillionaire";
-    else if (state.money >= 1000000) state.title = "Millionaire";
-    else if (state.money >= 100000) state.title = "Hundred Grand";
-    else if (state.money >= 10000) state.title = "Wealthy";
-    else if (state.money >= 1000) state.title = "Comfortable";
-    else if (state.money >= 100) state.title = "Getting Started";
-    else state.title = "Broke";
+    // Ranks
+    if (state.damage >= 1000000000000) state.rank = "Omnipotent";
+    else if (state.damage >= 1000000000) state.rank = "Universal";
+    else if (state.damage >= 100000000) state.rank = "Godslayer";
+    else if (state.damage >= 10000000) state.rank = "Legend";
+    else if (state.damage >= 1000000) state.rank = "Champion";
+    else if (state.damage >= 100000) state.rank = "Hero";
+    else if (state.damage >= 10000) state.rank = "Knight";
+    else if (state.damage >= 1000) state.rank = "Warrior";
+    else if (state.damage >= 100) state.rank = "Adventurer";
+    else if (state.damage >= 10) state.rank = "Mob Hunter";
+    else state.rank = "Novice";
 
     // Rewards
     for (const key in state.rewards) {
-        if (!state.rewards[key].unlocked && state.money >= state.rewards[key].req) {
+        if (!state.rewards[key].unlocked && state.damage >= state.rewards[key].req) {
             state.rewards[key].unlocked = true;
         }
     }
@@ -485,251 +486,292 @@ function updateStocks() {
 }
 
 // Event Listeners
-bankCard.addEventListener('click', (e) => {
-    state.money += state.moneyPerClick;
+maceEl.addEventListener('click', (e) => {
+    state.damage += state.damagePerClick;
     
     // Create floating text
     const floatText = document.createElement('div');
     floatText.className = 'floating-text';
-    floatText.innerText = '+$' + formatMoney(state.moneyPerClick);
+    floatText.innerText = '+' + formatDamage(state.damagePerClick) + ' ⚔️';
     
-    // Get card position to center the text if clicked via keyboard, otherwise use mouse coords
-    const rect = bankCard.getBoundingClientRect();
+    // Get mace position to center the text if clicked via keyboard, otherwise use mouse coords
+    const rect = maceEl.getBoundingClientRect();
     const x = e.clientX || (rect.left + rect.width / 2);
     const y = e.clientY || (rect.top + rect.height / 2);
     
     floatText.style.left = x + 'px';
     floatText.style.top = y + 'px';
-    
     document.body.appendChild(floatText);
-
-    setTimeout(() => {
-        floatText.remove();
-    }, 1000);
-
+    
+    // Animate and remove
+    floatText.animate([
+        { transform: 'translateY(0) scale(1)', opacity: 1 },
+        { transform: 'translateY(-80px) scale(1.5)', opacity: 0 }
+    ], {
+        duration: 800,
+        easing: 'ease-out'
+    }).onfinish = () => floatText.remove();
+    
     updateUI();
 });
 
-// Event System
-function startRandomEvent() {
-    if (state.activeEvent) return; // Event already running
+// Also allow spacebar to click
+document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+        e.preventDefault();
+        state.damage += state.damagePerClick;
+        
+        // Create floating text
+        const floatText = document.createElement('div');
+        floatText.className = 'floating-text';
+        floatText.innerText = '+' + formatDamage(state.damagePerClick) + ' ⚔️';
+        
+        const rect = maceEl.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        
+        floatText.style.left = x + 'px';
+        floatText.style.top = y + 'px';
+        document.body.appendChild(floatText);
+        
+        floatText.animate([
+            { transform: 'translateY(0) scale(1)', opacity: 1 },
+            { transform: 'translateY(-80px) scale(1.5)', opacity: 0 }
+        ], {
+            duration: 800,
+            easing: 'ease-out'
+        }).onfinish = () => floatText.remove();
+        
+        updateUI();
+    }
+});
 
-    const events = [
-        { name: "2x Money!", type: "money", multiplier: 2, color: "#10b981" },
-        { name: "2x Upgrades!", type: "upgrade", multiplier: 2, color: "#3b82f6" }
-    ];
+// Passive income (DPS)
+setInterval(() => {
+    if (state.dps > 0) {
+        state.damage += state.dps;
+        updateUI();
+    }
+}, 1000);
 
-    const event = events[Math.floor(Math.random() * events.length)];
-    const duration = Math.floor(Math.random() * 11000) + 20000; // 20-31 seconds
+// Stock market update
+setInterval(() => {
+    updateStocks();
+}, 5000);
 
-    state.activeEvent = event;
-    state.eventEndTime = Date.now() + duration;
-
-    showEventNotification(event.name, event.color);
+// Save/Load System
+function saveGame() {
+    const saveData = {
+        damage: state.damage,
+        damagePerClick: state.damagePerClick,
+        dps: state.dps,
+        rank: state.rank,
+        upgrades: state.upgrades,
+        companies: state.companies,
+        realEstate: state.realEstate,
+        shop: state.shop,
+        stocks: state.stocks,
+        rewards: state.rewards,
+        playerName: state.playerName,
+        lastSaved: Date.now()
+    };
+    localStorage.setItem('maceClickerSave', JSON.stringify(saveData));
 }
 
-function checkEvent() {
-    if (state.activeEvent && Date.now() > state.eventEndTime) {
-        state.activeEvent = null;
-        showEventNotification("Event Ended", "#ef4444");
+function loadGame() {
+    const saved = localStorage.getItem('maceClickerSave');
+    if (saved) {
+        const saveData = JSON.parse(saved);
+        state.damage = saveData.damage || 0;
+        state.damagePerClick = saveData.damagePerClick || 1;
+        state.dps = saveData.dps || 0;
+        state.rank = saveData.rank || "Novice";
+        state.playerName = saveData.playerName || "Player";
+        
+        // Load upgrades
+        if (saveData.upgrades) {
+            for (const key in saveData.upgrades) {
+                if (state.upgrades[key]) {
+                    state.upgrades[key].level = saveData.upgrades[key].level;
+                }
+            }
+        }
+        
+        // Load companies
+        if (saveData.companies) {
+            for (const key in saveData.companies) {
+                if (state.companies[key]) {
+                    state.companies[key].level = saveData.companies[key].level;
+                }
+            }
+        }
+        
+        // Load real estate
+        if (saveData.realEstate) {
+            for (const key in saveData.realEstate) {
+                if (state.realEstate[key]) {
+                    state.realEstate[key].level = saveData.realEstate[key].level;
+                }
+            }
+        }
+        
+        // Load shop
+        if (saveData.shop) {
+            for (const key in saveData.shop) {
+                if (state.shop[key]) {
+                    state.shop[key].owned = saveData.shop[key].owned;
+                }
+            }
+        }
+        
+        // Load stocks
+        if (saveData.stocks) {
+            for (const key in saveData.stocks) {
+                if (state.stocks[key]) {
+                    state.stocks[key].price = saveData.stocks[key].price;
+                    state.stocks[key].owned = saveData.stocks[key].owned;
+                }
+            }
+        }
+        
+        // Load rewards
+        if (saveData.rewards) {
+            for (const key in saveData.rewards) {
+                if (state.rewards[key]) {
+                    state.rewards[key].unlocked = saveData.rewards[key].unlocked;
+                }
+            }
+        }
+        
+        // Calculate offline earnings
+        if (saveData.lastSaved) {
+            const timePassed = (Date.now() - saveData.lastSaved) / 1000;
+            const offlineEarnings = Math.floor(timePassed * state.dps);
+            if (offlineEarnings > 0) {
+                state.damage += offlineEarnings;
+                console.log(`Earned ${offlineEarnings} damage while offline!`);
+            }
+        }
+        
+        recalculateStats();
     }
 }
 
-function showEventNotification(text, color) {
-    const notif = document.createElement('div');
-    notif.innerText = text;
-    notif.style.position = 'fixed';
-    notif.style.top = '20px';
-    notif.style.left = '50%';
-    notif.style.transform = 'translateX(-50%)';
-    notif.style.backgroundColor = color;
-    notif.style.color = 'white';
-    notif.style.padding = '10px 20px';
-    notif.style.borderRadius = '5px';
-    notif.style.fontWeight = 'bold';
-    notif.style.zIndex = '10000';
-    notif.style.animation = 'fadeInOut 3s forwards';
-    document.body.appendChild(notif);
-    setTimeout(() => notif.remove(), 3000);
-}
+// Auto-save every 30 seconds
+setInterval(saveGame, 30000);
 
-function triggerGlobalEvent(name, type, multiplier) {
-    const duration = 30000; // 30 seconds
-    state.activeEvent = { name: name, type: type, multiplier: multiplier };
-    state.eventEndTime = Date.now() + duration;
-    showEventNotification("ADMIN ABUSE: " + name, "#ef4444");
-}
-
-// Code System
-function redeemCode(code) {
-    switch(code.toLowerCase()) {
-        case 'release':
-            state.money += 5000;
-            alert("Code Redeemed! +$5,000");
-            updateUI();
-            break;
-        case 'foxygoated':
-            state.money += 100000;
-            alert("Code Redeemed! +$100,000");
-            updateUI();
-            break;
-        case 'neonthebest':
-            if (!state.adminPanelEnabled) {
-                state.adminPanelEnabled = true;
-                setTimeout(() => alert("Admin Panel Unlocked! Check the stats bar."), 100);
-            } else {
-                setTimeout(() => alert("Admin Panel already unlocked!"), 100);
-            }
-            updateUI();
-            break;
-        case 'endschool':
-            state.money += 30000;
-            alert("Code Redeemed! +$30,000");
-            updateUI();
-            break;
-        case 'setname':
-            const name = prompt("Enter your name:");
-            if(name) {
-                state.playerName = name;
-                alert("Name set to: " + name);
-            }
-            updateUI();
-            break;
-        default:
-            alert("Invalid Code!");
-    }
-}
+// Save on page close
+window.addEventListener('beforeunload', saveGame);
 
 // Leaderboard System
 function updateLeaderboard() {
-    let leaderboard = JSON.parse(localStorage.getItem('bankClickerLeaderboard')) || [];
+    let leaderboard = JSON.parse(localStorage.getItem('maceClickerLeaderboard') || '[]');
     
     // Add current player
     const existingIndex = leaderboard.findIndex(p => p.name === state.playerName);
-    if (existingIndex > -1) {
-        leaderboard[existingIndex].money = Math.max(leaderboard[existingIndex].money, state.money);
+    if (existingIndex >= 0) {
+        leaderboard[existingIndex].damage = state.damage;
     } else {
-        leaderboard.push({ name: state.playerName, money: state.money });
+        leaderboard.push({ name: state.playerName, damage: state.damage });
     }
     
-    // Sort by money desc
-    leaderboard.sort((a, b) => b.money - a.money);
+    // Sort by damage (descending)
+    leaderboard.sort((a, b) => b.damage - a.damage);
     
     // Keep top 10
     leaderboard = leaderboard.slice(0, 10);
     
-    localStorage.setItem('bankClickerLeaderboard', JSON.stringify(leaderboard));
+    localStorage.setItem('maceClickerLeaderboard', JSON.stringify(leaderboard));
     return leaderboard;
 }
 
-
-
-// Game Loop
-setInterval(() => {
-    if (state.activeEvent && state.activeEvent.type === "money") {
-        state.money += state.moneyPerSecond * state.activeEvent.multiplier;
-    } else {
-        state.money += state.moneyPerSecond;
-    }
-    checkEvent();
-    updateUI();
-    saveGame();
-}, 1000);
-
-// Stock Market Loop
-setInterval(updateStocks, 5000);
-
-// Event Loop (Every 2-3 minutes)
-setInterval(() => {
-    startRandomEvent();
-}, Math.floor(Math.random() * 60000) + 120000);
-
-// Save and Load
-async function saveGame() {
-    state.lastSaved = Date.now();
-    localStorage.setItem('bankCardClickerSave', JSON.stringify(state));
+// Redeem Code System
+function redeemCode(code) {
+    const codes = {
+        'MACE10': { damage: 10, name: "10 Damage" },
+        'MACE100': { damage: 100, name: "100 Damage" },
+        'MACE1K': { damage: 1000, name: "1K Damage" },
+        'MACE10K': { damage: 10000, name: "10K Damage" },
+        'MACE100K': { damage: 100000, name: "100K Damage" },
+        'VIP': { damage: 1000000, name: "VIP - 1M Damage" },
+        'ADMIN': { damage: 100000000, name: "Admin - 100M Damage", admin: true },
+        'OMEGA': { damage: 1000000000, name: "Omega - 1B Damage" },
+        'GODMODE': { damage: 10000000000, name: "God Mode - 10B Damage" }
+    };
     
-    if (supabase) {
-        try {
-            await supabase.rpc('save_player', {
-                p_player_name: state.playerName,
-                p_money: state.money,
-                p_money_per_click: state.moneyPerClick,
-                p_money_per_second: state.moneyPerSecond,
-                p_current_title: state.title,
-                p_upgrades: JSON.stringify(state.upgrades),
-                p_companies: JSON.stringify(state.companies),
-                p_houses: JSON.stringify(state.realEstate),
-                p_shop: JSON.stringify(state.shop),
-                p_stocks: JSON.stringify(state.stocks)
-            });
-        } catch(e) {}
-    }
-}
-
-async function loadGame() {
-    const saved = localStorage.getItem('bankCardClickerSave');
-    if (saved) {
-        const parsed = JSON.parse(saved);
-        Object.assign(state, parsed);
+    if (codes[code.toUpperCase()]) {
+        const reward = codes[code.toUpperCase()];
+        state.damage += reward.damage;
+        alert(`Code redeemed! +${reward.name}`);
         
-        if (state.lastSaved) {
-            const now = Date.now();
-            const diffSeconds = Math.floor((now - state.lastSaved) / 1000);
-            if (diffSeconds > 0 && state.moneyPerSecond > 0) {
-                const offlineEarnings = diffSeconds * state.moneyPerSecond;
-                state.money += offlineEarnings;
-                alert(`Welcome back! You earned ${formatMoney(offlineEarnings)} while you were offline.`);
-            }
+        if (reward.admin) {
+            state.adminPanelEnabled = true;
+            alert("Admin panel enabled!");
         }
+        
+        updateUI();
     } else {
-        setTimeout(() => {
-            const name = prompt("Welcome! Please enter your name for the leaderboard:");
-            if(name && name.trim() !== "") {
-                state.playerName = name.trim();
-            } else {
-                state.playerName = "Player";
-            }
-            updateUI();
-        }, 500);
+        alert("Invalid code!");
     }
-    
-    // Try to load from Supabase (disabled for now)
-    /*
-    if (supabase) {
-        try {
-            const { data } = await supabase.rpc('get_player', { p_player_name: state.playerName });
-            if (data && data.length > 0 && data[0].money > 0) {
-                const p = data[0];
-                state.money = p.money;
-                state.moneyPerClick = p.money_per_click;
-                state.moneyPerSecond = p.money_per_second;
-                state.title = p.current_title;
-                state.upgrades = JSON.parse(p.upgrades);
-                state.companies = JSON.parse(p.companies);
-                state.realEstate = JSON.parse(p.houses);
-                state.shop = JSON.parse(p.shop);
-                state.stocks = JSON.parse(p.stocks);
-                localStorage.setItem('bankCardClickerSave', JSON.stringify(state));
-                console.log('Loaded from cloud!');
-            }
-        } catch(e) {}
-    }
-    */
 }
 
-// Initial Render
+// Trigger Global Event (for admin)
+function triggerGlobalEvent(eventName, statType, multiplier) {
+    state.activeEvent = {
+        name: eventName,
+        statType: statType,
+        multiplier: multiplier,
+        endTime: Date.now() + 300000 // 5 minutes
+    };
+    state.eventEndTime = Date.now() + 300000;
+    alert(`EVENT STARTED: ${eventName} for 5 minutes!`);
+}
+
+// Check for active events
+function checkEvents() {
+    if (state.activeEvent && Date.now() < state.eventEndTime) {
+        // Event is active
+    } else {
+        state.activeEvent = null;
+        state.eventEndTime = 0;
+    }
+}
+
+// Initialize game
 loadGame();
-recalculateStats();
 updateUI();
+recalculateStats();
 
-// Force name prompt if empty
-if (!state.playerName || state.playerName === "" || state.playerName === "Player") {
-    setTimeout(() => {
-        const name = prompt("Please enter your name for the leaderboard:");
-        if(name && name.trim() !== "") {
-            state.playerName = name.trim();
-            updateUI();
-        }
-    }, 1000);
+// Check for saved player name
+const savedPlayerName = localStorage.getItem('maceClickerPlayerName');
+if (savedPlayerName) {
+    state.playerName = savedPlayerName;
+} else {
+    const newName = prompt("Welcome to Mace Clicker! Enter your name:", "Player");
+    if (newName && newName.trim()) {
+        state.playerName = newName.trim();
+        localStorage.setItem('maceClickerPlayerName', state.playerName);
+    }
 }
+
+// Render floating damage numbers on click (additional visual effect)
+maceEl.addEventListener('mousedown', () => {
+    maceEl.classList.add('mace-clicking');
+});
+
+maceEl.addEventListener('mouseup', () => {
+    maceEl.classList.remove('mace-clicking');
+});
+
+maceEl.addEventListener('mouseleave', () => {
+    maceEl.classList.remove('mace-clicking');
+});
+
+// Debug: Enter dev mode
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+        state.adminPanelEnabled = !state.adminPanelEnabled;
+        alert(state.adminPanelEnabled ? "Dev mode enabled!" : "Dev mode disabled!");
+        updateUI();
+    }
+});

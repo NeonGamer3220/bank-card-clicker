@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank Card Clicker</title>
+    <title>Mace Clicker</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1><i class="fa-solid fa-money-bill-wave"></i> Bank Card Clicker</h1>
+            <h1><i class="fa-solid fa-hammer"></i> Mace Clicker</h1>
             <div class="stats-bar">
-                <p><i class="fa-solid fa-wallet"></i> Money: $<span id="money">0</span></p>
-                <p><i class="fa-solid fa-hand-pointer"></i> Money per Click: $<span id="money-per-click">1</span></p>
-                <p><i class="fa-solid fa-stopwatch"></i> Money per Second: $<span id="money-per-second">0</span></p>
-                <p><i class="fa-solid fa-medal"></i> Title: <span id="current-title">Broke</span></p>
+                <p><i class="fa-solid fa-khanda"></i> Damage: <span id="damage">0</span></p>
+                <p><i class="fa-solid fa-hand-fist"></i> Damage per Click: <span id="damage-per-click">1</span></p>
+                <p><i class="fa-solid fa-stopwatch"></i> DPS: <span id="damage-per-second">0</span></p>
+                <p><i class="fa-solid fa-medal"></i> Rank: <span id="current-title">Novice</span></p>
                 <div class="code-input-container">
                     <input type="text" id="code-input" placeholder="Enter Code">
                     <button onclick="redeemCode(document.getElementById('code-input').value)">Redeem</button>
@@ -25,44 +25,42 @@
 
         <main>
             <section class="click-area">
-                <div id="bank-card" class="card">
-                    <div class="card-chip"></div>
-                    <div class="card-number">**** **** **** 1234</div>
-                    <div class="card-bottom">
-                        <div class="card-name">CLICK ME</div>
-                        <div class="card-logo">KiloBank</div>
+                <div id="mace" class="mace">
+                    <div class="mace-head"></div>
+                    <div class="mace-handle">
+                        <div class="mace-grip"></div>
                     </div>
                 </div>
             </section>
 
             <div class="panels">
                 <section class="panel" id="upgrades-panel">
-                    <h2><i class="fa-solid fa-arrow-up-right-dots"></i> Card Upgrades</h2>
+                    <h2><i class="fa-solid fa-wand-magic-sparkles"></i> Enchantments</h2>
                     <div id="upgrades-list" class="list"></div>
                 </section>
 
                 <section class="panel" id="companies-panel">
-                    <h2><i class="fa-solid fa-building"></i> Companies</h2>
+                    <h2><i class="fa-solid fa-dragon"></i> Mobs</h2>
                     <div id="companies-list" class="list"></div>
                 </section>
 
                 <section class="panel" id="real-estate-panel">
-                    <h2><i class="fa-solid fa-house-chimney"></i> Real Estate</h2>
+                    <h2><i class="fa-solid fa-mountain-sun"></i> Biomes</h2>
                     <div id="real-estate-list" class="list"></div>
                 </section>
 
                 <section class="panel" id="shop-panel">
-                    <h2><i class="fa-solid fa-cart-shopping"></i> Luxury Shop</h2>
+                    <h2><i class="fa-solid fa-box-open"></i> Loot</h2>
                     <div id="shop-list" class="list"></div>
                 </section>
 
                 <section class="panel" id="stock-market-panel">
-                    <h2><i class="fa-solid fa-chart-line"></i> Stock Market</h2>
+                    <h2><i class="fa-solid fa-gem"></i> Enchanted Items</h2>
                     <div id="stock-list" class="list"></div>
                 </section>
 
                 <section class="panel" id="rewards-panel">
-                    <h2><i class="fa-solid fa-trophy"></i> Titles & Rewards</h2>
+                    <h2><i class="fa-solid fa-trophy"></i> Achievements</h2>
                     <div id="rewards-list" class="list"></div>
                 </section>
 
