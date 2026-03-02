@@ -14,7 +14,19 @@ const state = {
         goldNugget: { level: 0, baseCost: 5000, costMult: 2, effect: 100, name: "Gold Nugget", desc: "+100 damage/click", icon: "fa-coins" },
         netherite: { level: 0, baseCost: 100000, costMult: 2.5, effect: 2500, name: "Netherite Scrap", desc: "+2,500 damage/click", icon: "fa-fire" },
         diamond: { level: 0, baseCost: 5000000, costMult: 3, effect: 50000, name: "Diamond", desc: "+50,000 damage/click", icon: "fa-gem" },
-        beacon: { level: 0, baseCost: 250000000, costMult: 3.5, effect: 1000000, name: "Beacon", desc: "+1,000,000 damage/click", icon: "fa-lightbulb" }
+        beacon: { level: 0, baseCost: 250000000, costMult: 3.5, effect: 1000000, name: "Beacon", desc: "+1,000,000 damage/click", icon: "fa-lightbulb" },
+        // New Enchantments
+        efficiency: { level: 0, baseCost: 75, costMult: 1.6, effect: 2, name: "Efficiency", desc: "+2 damage/click", icon: "fa-bolt" },
+        unbreaking: { level: 0, baseCost: 150, costMult: 1.7, effect: 5, name: "Unbreaking", desc: "+5 damage/click", icon: "fa-shield-halved" },
+        sharpness: { level: 0, baseCost: 1000, costMult: 1.9, effect: 25, name: "Sharpness", desc: "+25 damage/click", icon: "fa-knife" },
+        power: { level: 0, baseCost: 7500, costMult: 2.1, effect: 150, name: "Power", desc: "+150 damage/click", icon: "fa-fist-raised" },
+        protection: { level: 0, baseCost: 25000, costMult: 2.2, effect: 500, name: "Protection", desc: "+500 damage/click", icon: "fa-helmet-safety" },
+        fortune: { level: 0, baseCost: 75000, costMult: 2.3, effect: 1500, name: "Fortune", desc: "+1,500 damage/click", icon: "fa-sack-dollar" },
+        looting: { level: 0, baseCost: 250000, costMult: 2.4, effect: 5000, name: "Looting", desc: "+5,000 damage/click", icon: "fa-box-treasure" },
+        silkTouch: { level: 0, baseCost: 500000, costMult: 2.6, effect: 15000, name: "Silk Touch", desc: "+15,000 damage/click", icon: "fa-hand-sparkles" },
+        infinity: { level: 0, baseCost: 1000000, costMult: 2.7, effect: 30000, name: "Infinity", desc: "+30,000 damage/click", icon: "fa-infinity" },
+        mending: { level: 0, baseCost: 5000000, costMult: 2.8, effect: 75000, name: "Mending", desc: "+75,000 damage/click", icon: "fa-hammer" },
+        flame: { level: 0, baseCost: 10000000, costMult: 2.9, effect: 150000, name: "Flame", desc: "+150,000 damage/click", icon: "fa-fire-flame-curved" }
     },
     companies: {
         zombie: { level: 0, baseCost: 100, costMult: 1.15, effect: 1, name: "Zombie", desc: "+1 DPS", icon: "fa-biohazard" },
